@@ -1332,17 +1332,17 @@
     value: '你可以备份绘画。'
   },
   submit: {
-    original: 'Submit',
+    original: 'Save',
     value: '提交'
   },
   'submit-title': {
-    hint: 'tooltip when hovering "Submit" button',
-    original: 'Submit Drawing',
+    hint: 'tooltip when hovering "Save" button',
+    original: 'Save Signature',
     value: '提交作品'
   },
   'submit-prompt': {
     hint: 'Dialog asking for confirmation',
-    original: 'Submit drawing?',
+    original: 'Save drawing?',
     value: '确认提交？'
   },
   'submit-submitting': {

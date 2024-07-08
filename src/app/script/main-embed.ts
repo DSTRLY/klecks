@@ -121,6 +121,13 @@ export class Embed {
         return this.klApp.getPNG();
     }
 
+    getPNGOfLayerByName (name: string): Blob {
+        if (!this.klApp) {
+            throw new Error('App not initialized');
+        }
+        return this.klApp.getPNGOfLayerByName(name);
+    }
+
     async getPSD (): Promise<Blob> {
         if (!this.klApp) {
             throw new Error('App not initialized');

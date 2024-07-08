@@ -2,7 +2,7 @@ import {BB} from '../../bb/bb';
 import {floodFillBits} from '../image-operations/flood-fill';
 import {drawShape} from '../image-operations/shape-tool';
 import {TRenderTextParam, renderText} from '../image-operations/render-text';
-import {IGradient, IKlProject, IRGB, IShapeToolObject, TFillSampling, TKlCanvasLayer, TMixMode} from '../kl-types';
+import {IGradient, IKlBasicLayer, IKlProject, IRGB, IShapeToolObject, TFillSampling, TKlCanvasLayer, TMixMode} from '../kl-types';
 import {DecoyKlHistory, KlHistoryInterface, THistoryActions} from '../history/kl-history';
 import {drawProject} from './draw-project';
 import {LANG} from '../../language/language';
@@ -1002,6 +1002,33 @@ export class KlCanvas {
                     image: layer,
                 };
             }),
+        };
+    }
+
+    getCanvasWithOnlyOneLayerByName (name: string, factor: number): HTMLCanvasElement {
+        return drawProject(this.getProjectWithOnlyOneLayerByName(name), factor);
+    }
+
+    getProjectWithOnlyOneLayerByName (name: string): IKlProject {
+        const layers = [];
+
+        const layerByName = this.layerCanvasArr.find(layer => layer.name === name);
+        if (!layerByName) {
+            throw new Error('layer not found');
+        }
+
+        layers.push({
+            name: layerByName.name,
+            isVisible: layerByName.isVisible,
+            opacity: layerByName.opacity,
+            mixModeStr: layerByName.mixModeStr,
+            image: layerByName,
+        })
+
+        return {
+            width: this.width,
+            height: this.height,
+            layers,
         };
     }
 

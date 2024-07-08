@@ -1332,17 +1332,17 @@
     value: 'Puedes hacer una copia de seguridad de tu dibujo.'
   },
   submit: {
-    original: 'Submit',
+    original: 'Save',
     value: 'Entregar'
   },
   'submit-title': {
-    hint: 'tooltip when hovering "Submit" button',
-    original: 'Submit Drawing',
+    hint: 'tooltip when hovering "Save" button',
+    original: 'Save Signature',
     value: 'Entrega Dibujo'
   },
   'submit-prompt': {
     hint: 'Dialog asking for confirmation',
-    original: 'Submit drawing?',
+    original: 'Save drawing?',
     value: 'Entrega dibujo?'
   },
   'submit-submitting': {

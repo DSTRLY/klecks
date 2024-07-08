@@ -1332,17 +1332,17 @@
     value: 'Vous pouvez sauvegarder votre dessin.'
   },
   submit: {
-    original: 'Submit',
+    original: 'Save',
     value: 'Envoyer'
   },
   'submit-title': {
-    hint: 'tooltip when hovering "Submit" button',
-    original: 'Submit Drawing',
+    hint: 'tooltip when hovering "Save" button',
+    original: 'Save Signature',
     value: 'Soumettre Le Dessin'
   },
   'submit-prompt': {
     hint: 'Dialog asking for confirmation',
-    original: 'Submit drawing?',
+    original: 'Save drawing?',
     value: 'Soumettre Un Dessin?'
   },
   'submit-submitting': {

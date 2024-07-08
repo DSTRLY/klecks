@@ -93,12 +93,12 @@ export class EmbedToolspaceTopRow {
         });
         submitButton.el.style.width = '45px';
 
-        const helpButton = createButton({
-            onClick: p.onHelp,
-            title: LANG('help'),
-            image: helpImg,
-            contain: true,
-        });
+        // const helpButton = createButton({
+        //     onClick: p.onHelp,
+        //     title: LANG('help'),
+        //     image: helpImg,
+        //     contain: true,
+        // });
 
         const leftRightButton = createButton({
             onClick: p.onLeftRight,
@@ -107,7 +107,7 @@ export class EmbedToolspaceTopRow {
             contain: true,
         });
 
-        this.rootEl.append(submitButton.el, leftRightButton.el, helpButton.el);
+        this.rootEl.append(submitButton.el, leftRightButton.el);
     }
 
     getElement (): HTMLElement {

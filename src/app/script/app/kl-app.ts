@@ -1511,7 +1511,7 @@ export class KlApp {
 
 
         BB.append(this.toolspaceInner, [
-            this.layerPreview.getElement(),
+            // this.layerPreview.getElement(),
             // mainTabRow.getElement(),
             brushDiv,
             handUi.getElement(),
@@ -1675,6 +1675,10 @@ export class KlApp {
 
     getPNG (): Blob {
         return base64ToBlob(this.klCanvas.getCompleteCanvas(1).toDataURL('image/png'));
+    }
+
+    getPNGOfLayerByName (name: string): Blob {
+        return base64ToBlob(this.klCanvas.getCanvasWithOnlyOneLayerByName(name, 1).toDataURL('image/png'));
     }
 
     getPSD = async ():  Promise<Blob> => {

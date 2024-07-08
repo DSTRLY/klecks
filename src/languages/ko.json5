@@ -1332,17 +1332,17 @@
     value: '그림을 백업할 수 있습니다.'
   },
   submit: {
-    original: 'Submit',
+    original: 'Save',
     value: '제출'
   },
   'submit-title': {
-    hint: 'tooltip when hovering "Submit" button',
-    original: 'Submit Drawing',
+    hint: 'tooltip when hovering "Save" button',
+    original: 'Save Signature',
     value: '그림 제출'
   },
   'submit-prompt': {
     hint: 'Dialog asking for confirmation',
-    original: 'Submit drawing?',
+    original: 'Save drawing?',
     value: '그림을 제출하시겠습니까?'
   },
   'submit-submitting': {

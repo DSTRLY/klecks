@@ -86,6 +86,7 @@ export class EmbedWrapper {
             this.instance = new mainEmbed.Embed(p);
 
             this.getPNG = () => this.instance!.getPNG();
+            this.getPNGOfLayerByName = (name: string) => this.instance!.getPNGOfLayerByName(name);
             this.getPSD = () => this.instance!.getPSD();
 
             if (this.project) {
@@ -145,5 +146,6 @@ export class EmbedWrapper {
     }
 
     getPNG: (() => Blob) | undefined = undefined;
+    getPNGOfLayerByName: ((name: string) => Blob) | undefined = undefined;
     getPSD: (() => Promise<Blob>) | undefined = undefined;
 }

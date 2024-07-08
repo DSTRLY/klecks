@@ -1332,17 +1332,17 @@
     value: 'Вы можете создать резервную копию своего рисунка.'
   },
   submit: {
-    original: 'Submit',
+    original: 'Save',
     value: 'Отправить'
   },
   'submit-title': {
-    hint: 'tooltip when hovering "Submit" button',
-    original: 'Submit Drawing',
+    hint: 'tooltip when hovering "Save" button',
+    original: 'Save Signature',
     value: 'Отправка рисунка'
   },
   'submit-prompt': {
     hint: 'Dialog asking for confirmation',
-    original: 'Submit drawing?',
+    original: 'Save drawing?',
     value: 'Отправить рисунок?'
   },
   'submit-submitting': {

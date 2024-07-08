@@ -874,14 +874,14 @@ renaming keys across language files:
     "value": 'You can backup your drawing.',
   },
 
-  "submit": "Submit",
+  "submit": "Save",
   "submit-title": {
-    "hint": "tooltip when hovering \"Submit\" button",
-    "value": "Submit Drawing"
+    "hint": "tooltip when hovering \"Save\" button",
+    "value": "Save Signature"
   },
   "submit-prompt": {
     "hint": "Dialog asking for confirmation",
-    "value": "Submit drawing?"
+    "value": "Save drawing?"
   },
   "submit-submitting": {
     "hint": "in the process of uploading",
