@@ -1512,7 +1512,7 @@ export class KlApp {
 
         BB.append(this.toolspaceInner, [
             this.layerPreview.getElement(),
-            mainTabRow.getElement(),
+            // mainTabRow.getElement(),
             brushDiv,
             handUi.getElement(),
             fillUi.getElement(),
