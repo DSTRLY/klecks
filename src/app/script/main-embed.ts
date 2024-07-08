@@ -1,17 +1,18 @@
 import './polyfills/polyfills';
-import {KlApp} from './app/kl-app';
-import {IKlProject} from './klecks/kl-types';
-import {SaveReminder} from './klecks/ui/components/save-reminder';
-import {klHistory} from './klecks/history/kl-history';
-import {klPsdToKlProject, readPsd} from './klecks/storage/psd';
-import {LANG} from './language/language';
-import {loadAgPsd, TAgPsd} from './klecks/storage/load-ag-psd';
-import {klConfig} from './klecks/kl-config';
+import { KlApp } from './app/kl-app';
+import { IKlProject } from './klecks/kl-types';
+import { SaveReminder } from './klecks/ui/components/save-reminder';
+import { klHistory } from './klecks/history/kl-history';
+import { klPsdToKlProject, readPsd } from './klecks/storage/psd';
+import { LANG } from './language/language';
+import { loadAgPsd, TAgPsd } from './klecks/storage/load-ag-psd';
+import { klConfig } from './klecks/kl-config';
 
 export interface IEmbedParams {
     project?: IKlProject;
     psdBlob?: Blob;
     onSubmit: (onSuccess: () => void, onError: () => void) => void;
+    onCloseApp: () => void;
     embedUrl: string;
     logoImg?: any;
     bottomBar?: HTMLElement;
@@ -38,7 +39,7 @@ export class Embed {
     private loadingScreenTextEl: HTMLElement | null;
 
 
-    onProjectReady (project: IKlProject) {
+    onProjectReady(project: IKlProject) {
         try {
             if (this.isInitialized) {
                 throw new Error('Already called openProject');
@@ -49,7 +50,7 @@ export class Embed {
                 klHistory,
                 false,
                 false,
-                () => {},
+                () => { },
                 () => this.klApp ? this.klApp.isDrawing() : false,
                 null,
                 null,
@@ -63,6 +64,10 @@ export class Embed {
                     embed: {
                         url: this.p.embedUrl,
                         onSubmit: this.p.onSubmit,
+                        onCloseApp: () => {
+                            console.log("Closing app from Embed");
+                            this.p.onCloseApp();
+                        }
                     },
                 }
             );
@@ -85,7 +90,7 @@ export class Embed {
     }
 
     // ----- public ----------
-    constructor (private p: IEmbedParams) {
+    constructor(private p: IEmbedParams) {
 
         this.loadingScreenEl = document.getElementById('loading-screen');
         this.loadingScreenTextEl = document.getElementById('loading-screen-text');
@@ -105,7 +110,7 @@ export class Embed {
         this.onProjectReady(project);
     };
 
-    initError (error: string) {
+    initError(error: string) {
         if (this.loadingScreenTextEl) {
             this.loadingScreenTextEl.textContent = '❌ ' + error;
         }
@@ -114,28 +119,28 @@ export class Embed {
         }
     }
 
-    getPNG (): Blob {
+    getPNG(): Blob {
         if (!this.klApp) {
             throw new Error('App not initialized');
         }
         return this.klApp.getPNG();
     }
 
-    getPNGOfLayerByName (name: string): Blob {
+    getPNGOfLayerByName(name: string): Blob {
         if (!this.klApp) {
             throw new Error('App not initialized');
         }
         return this.klApp.getPNGOfLayerByName(name);
     }
 
-    async getPSD (): Promise<Blob> {
+    async getPSD(): Promise<Blob> {
         if (!this.klApp) {
             throw new Error('App not initialized');
         }
         return await this.klApp.getPSD();
     }
 
-    readPSDs (psds: IReadPSD[]) {
+    readPSDs(psds: IReadPSD[]) {
         if (psds.length === 0) {
             return;
         }

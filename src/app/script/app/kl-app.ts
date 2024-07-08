@@ -1,8 +1,8 @@
-import {KL} from '../klecks/kl';
-import {klHistory, TMiscFocusLayerHistoryEntry} from '../klecks/history/kl-history';
-import {BB} from '../bb/bb';
-import {showIframeModal} from '../klecks/ui/modals/show-iframe-modal';
-import {EmbedToolspaceTopRow} from '../embed/embed-toolspace-top-row';
+import { KL } from '../klecks/kl';
+import { klHistory, TMiscFocusLayerHistoryEntry } from '../klecks/history/kl-history';
+import { BB } from '../bb/bb';
+import { showIframeModal } from '../klecks/ui/modals/show-iframe-modal';
+import { EmbedToolspaceTopRow } from '../embed/embed-toolspace-top-row';
 import {
     IGradient,
     IInitState,
@@ -12,27 +12,27 @@ import {
     TKlCanvasLayer,
     TUiLayout,
 } from '../klecks/kl-types';
-import {importFilters} from '../klecks/filters/filters-lazy';
-import {base64ToBlob} from '../klecks/storage/base-64-to-blob';
-import {klCanvasToPsdBlob} from '../klecks/storage/kl-canvas-to-psd-blob';
-import {ProjectStore} from '../klecks/storage/project-store';
-import {SaveReminder} from '../klecks/ui/components/save-reminder';
-import {KlCanvasWorkspace} from '../klecks/canvas-ui/kl-canvas-workspace';
-import {KlCanvas} from '../klecks/canvas/kl-canvas';
-import {LANG} from '../language/language';
-import {LocalStorage} from '../bb/base/local-storage';
-import {LineSmoothing} from '../klecks/events/line-smoothing';
-import {LineSanitizer} from '../klecks/events/line-sanitizer';
-import {TabRow} from '../klecks/ui/components/tab-row';
-import {LayerPreview} from '../klecks/ui/components/layer-preview';
-import {KlColorSlider} from '../klecks/ui/components/kl-color-slider';
-import {ToolspaceToolRow} from '../klecks/ui/components/toolspace-tool-row';
-import {StatusOverlay} from '../klecks/ui/components/status-overlay';
-import {SaveToComputer} from '../klecks/storage/save-to-computer';
-import {ToolspaceCollapser} from '../klecks/ui/components/toolspace-collapser';
-import {ToolspaceScroller} from '../klecks/ui/components/toolspace-scroller';
-import {translateSmoothing} from '../klecks/utils/translate-smoothing';
-import {ImportHandler} from './import-handler';
+import { importFilters } from '../klecks/filters/filters-lazy';
+import { base64ToBlob } from '../klecks/storage/base-64-to-blob';
+import { klCanvasToPsdBlob } from '../klecks/storage/kl-canvas-to-psd-blob';
+import { ProjectStore } from '../klecks/storage/project-store';
+import { SaveReminder } from '../klecks/ui/components/save-reminder';
+import { KlCanvasWorkspace } from '../klecks/canvas-ui/kl-canvas-workspace';
+import { KlCanvas } from '../klecks/canvas/kl-canvas';
+import { LANG } from '../language/language';
+import { LocalStorage } from '../bb/base/local-storage';
+import { LineSmoothing } from '../klecks/events/line-smoothing';
+import { LineSanitizer } from '../klecks/events/line-sanitizer';
+import { TabRow } from '../klecks/ui/components/tab-row';
+import { LayerPreview } from '../klecks/ui/components/layer-preview';
+import { KlColorSlider } from '../klecks/ui/components/kl-color-slider';
+import { ToolspaceToolRow } from '../klecks/ui/components/toolspace-tool-row';
+import { StatusOverlay } from '../klecks/ui/components/status-overlay';
+import { SaveToComputer } from '../klecks/storage/save-to-computer';
+import { ToolspaceCollapser } from '../klecks/ui/components/toolspace-collapser';
+import { ToolspaceScroller } from '../klecks/ui/components/toolspace-scroller';
+import { translateSmoothing } from '../klecks/utils/translate-smoothing';
+import { ImportHandler } from './import-handler';
 
 import toolPaintImg from '/src/app/img/ui/tool-paint.svg';
 import toolHandImg from '/src/app/img/ui/tool-hand.svg';
@@ -42,17 +42,18 @@ import toolTextImg from '/src/app/img/ui/tool-text.svg';
 import toolShapeImg from '/src/app/img/ui/tool-shape.svg';
 import tabSettingsImg from '/src/app/img/ui/tab-settings.svg';
 import tabLayersImg from '/src/app/img/ui/tab-layers.svg';
-import {LayerManager} from '../klecks/ui/tool-tabs/layer-manager/layer-manager';
-import {IVector2D} from '../bb/bb-types';
-import {createConsoleApi} from './console-api';
-import {ERASE_COLOR} from '../klecks/brushes/erase-color';
-import {throwIfNull} from '../bb/base/base';
-import {klConfig} from '../klecks/kl-config';
-import {TRenderTextParam} from '../klecks/image-operations/render-text';
+import { LayerManager } from '../klecks/ui/tool-tabs/layer-manager/layer-manager';
+import { IVector2D } from '../bb/bb-types';
+import { createConsoleApi } from './console-api';
+import { ERASE_COLOR } from '../klecks/brushes/erase-color';
+import { throwIfNull } from '../bb/base/base';
+import { klConfig } from '../klecks/kl-config';
+import { TRenderTextParam } from '../klecks/image-operations/render-text';
 
 type KlAppOptionsEmbed = {
     url: string;
     onSubmit: (onSuccess: () => void, onError: () => void) => void;
+    onCloseApp: () => void;
 };
 
 interface IKlAppOptions {
@@ -94,7 +95,7 @@ export class KlApp {
     private readonly toolspaceScroller: ToolspaceScroller;
     private readonly bottomBarWrapper: HTMLElement;
 
-    private updateCollapse (): void {
+    private updateCollapse(): void {
 
         //collapser
         if (this.uiWidth < this.collapseThreshold) {
@@ -164,7 +165,7 @@ export class KlApp {
         }
     }
 
-    private updateBottomBar (): void {
+    private updateBottomBar(): void {
         if (!this.bottomBar) {
             return;
         }
@@ -176,7 +177,7 @@ export class KlApp {
         }
     }
 
-    private updateUi (): void {
+    private updateUi(): void {
         this.toolspace.classList.toggle('kl-toolspace--left', this.uiState === 'left');
         this.toolspace.classList.toggle('kl-toolspace--right', this.uiState === 'right');
         if (this.uiState === 'left') {
@@ -204,7 +205,7 @@ export class KlApp {
     }
 
     // -------- public --------
-    constructor (
+    constructor(
         pProject: IKlProject | null,
         pOptions: IKlAppOptions,
     ) {
@@ -239,7 +240,7 @@ export class KlApp {
         let mainTabRow: TabRow | undefined = undefined;
 
         if (!pOptions.saveReminder) {
-            pOptions.saveReminder = {init: () => {}, reset: () => {}} as SaveReminder;
+            pOptions.saveReminder = { init: () => { }, reset: () => { } } as SaveReminder;
         }
 
         if (pProject) {
@@ -251,12 +252,12 @@ export class KlApp {
         } else {
             klHistory.pause(true);
             this.klCanvas.addLayer();
-            this.klCanvas.layerFill(0, {r: ERASE_COLOR, g: ERASE_COLOR, b: ERASE_COLOR});
+            this.klCanvas.layerFill(0, { r: ERASE_COLOR, g: ERASE_COLOR, b: ERASE_COLOR });
             klHistory.pause(false);
         }
         try {
             initState = {
-                canvas: new KL.KlCanvas({copy: this.klCanvas}, this.embed ? -1 : 0),
+                canvas: new KL.KlCanvas({ copy: this.klCanvas }, this.embed ? -1 : 0),
                 focus: this.klCanvas.getLayerCount() - 1,
                 brushes: {},
             };
@@ -364,7 +365,7 @@ export class KlApp {
             letterSpacing: 0,
             lineHeight: 1,
             fill: {
-                color: {r: 0, g: 0, b: 0, a: 1},
+                color: { r: 0, g: 0, b: 0, a: 1 },
             },
         } as TRenderTextParam;
 
@@ -423,13 +424,13 @@ export class KlApp {
                         x: canvasX,
                         y: canvasY,
                         angleRad: angleRad,
-                        fill : textToolSettings.fill ? {
+                        fill: textToolSettings.fill ? {
                             color: {
                                 ...this.klColorSlider.getColor(),
                                 a: textToolSettings.fill.color.a,
                             },
                         } : undefined,
-                        stroke : textToolSettings.stroke ? {
+                        stroke: textToolSettings.stroke ? {
                             ...textToolSettings.stroke,
                             color: {
                                 ...this.klColorSlider.getSecondaryRGB(),
@@ -536,10 +537,10 @@ export class KlApp {
                 }
 
                 if (comboStr === 'plus') {
-                    this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? 1/8 : 1/2);
+                    this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? 1 / 8 : 1 / 2);
                 }
                 if (comboStr === 'minus') {
-                    this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? -1/8 : -1/2);
+                    this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? -1 / 8 : -1 / 2);
                 }
                 if (comboStr === 'home') {
                     this.klCanvasWorkspace.fitView(true);
@@ -614,7 +615,7 @@ export class KlApp {
                 }
 
 
-                if (['r+left','r+right'].includes(comboStr)) {
+                if (['r+left', 'r+right'].includes(comboStr)) {
                     if (keyStr === 'left') {
                         this.klCanvasWorkspace.setAngle(-15, true);
                         handUi.update(this.klCanvasWorkspace.getScale(), this.klCanvasWorkspace.getAngleDeg());
@@ -646,7 +647,7 @@ export class KlApp {
                 if (['delete', 'backspace'].includes(comboStr)) {
                     const layerIndex = throwIfNull(this.klCanvas.getLayerIndex(currentLayerCtx.canvas));
                     if (layerIndex === 0 && !brushUiMap.eraserBrush.getIsTransparentBg()) {
-                        this.klCanvas.layerFill(layerIndex, {r: 255, g: 255, b: 255}, 'source-in');
+                        this.klCanvas.layerFill(layerIndex, { r: 255, g: 255, b: 255 }, 'source-in');
                     } else {
                         this.klCanvas.clearLayer(layerIndex);
                     }
@@ -786,6 +787,12 @@ export class KlApp {
         let toolspaceTopRow;
         if (this.embed) {
             toolspaceTopRow = new EmbedToolspaceTopRow({
+                onCloseApp: () => {
+                    console.log("Closing app from kl-app");
+                    if (typeof this.embed!.onCloseApp === 'function') {
+                        this.embed!.onCloseApp();
+                    }
+                },
                 onHelp: () => {
                     showIframeModal(this.embed!.url + '/help.html', !!this.embed);
                 },
@@ -807,16 +814,16 @@ export class KlApp {
                             target: this.klRootEl,
                             message: '<b>' + LANG('upload-failed') + '</b>',
                             div: BB.el({
-                                    content: [
-                                        BB.el({
-                                            content: LANG('backup-drawing'),
-                                            css: {
-                                                marginBottom: '10px',
-                                            },
-                                        }),
-                                        saveBtn,
-                                    ],
-                                }),
+                                content: [
+                                    BB.el({
+                                        content: LANG('backup-drawing'),
+                                        css: {
+                                            marginBottom: '10px',
+                                        },
+                                    }),
+                                    saveBtn,
+                                ],
+                            }),
                             ignoreBackground: true,
                             closeFunc: (f) => {
                                 closeFunc = f;
@@ -904,10 +911,10 @@ export class KlApp {
                 this.klColorSlider.pickingDone();
             },
             onZoomIn: () => {
-                this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? 1/8 : 1/2);
+                this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? 1 / 8 : 1 / 2);
             },
             onZoomOut: () => {
-                this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? -1/8 : -1/2);
+                this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? -1 / 8 : -1 / 2);
             },
             onUndo: () => {
                 undoRedoCatchup.undo();
@@ -1234,7 +1241,7 @@ export class KlApp {
                     this.klCanvasWorkspace.resetOrFitView();
                     handUi.update(this.klCanvasWorkspace.getScale(), this.klCanvasWorkspace.getAngleDeg());
                 },
-                onCancel: () => {},
+                onCancel: () => { },
             });
         };
 
@@ -1243,7 +1250,7 @@ export class KlApp {
                 canvas: this.klCanvas.getCompleteCanvas(1),
                 fileName: BB.getDate() + klConfig.filenameBase + '.png',
                 title: BB.getDate() + klConfig.filenameBase + '.png',
-                callback: callback ? callback : () => {},
+                callback: callback ? callback : () => { },
             });
         };
 
@@ -1643,11 +1650,11 @@ export class KlApp {
 
     // -------- interface --------
 
-    getEl (): HTMLElement {
+    getEl(): HTMLElement {
         return this.klRootEl;
     }
 
-    resize (w: number, h: number): void {
+    resize(w: number, h: number): void {
 
         // iPad scrolls down when increasing text zoom
         if (window.scrollY > 0) {
@@ -1669,27 +1676,27 @@ export class KlApp {
         this.toolspaceToolRow.setIsSmall(this.uiHeight < 540);
     }
 
-    out (msg: string): void {
+    out(msg: string): void {
         this.statusOverlay.out(msg);
     }
 
-    getPNG (): Blob {
+    getPNG(): Blob {
         return base64ToBlob(this.klCanvas.getCompleteCanvas(1).toDataURL('image/png'));
     }
 
-    getPNGOfLayerByName (name: string): Blob {
+    getPNGOfLayerByName(name: string): Blob {
         return base64ToBlob(this.klCanvas.getCanvasWithOnlyOneLayerByName(name, 1).toDataURL('image/png'));
     }
 
-    getPSD = async ():  Promise<Blob> => {
+    getPSD = async (): Promise<Blob> => {
         return await klCanvasToPsdBlob(this.klCanvas);
     };
 
-    getProject (): IKlProject {
+    getProject(): IKlProject {
         return this.klCanvas.getProject();
     }
 
-    swapUiLeftRight (): void {
+    swapUiLeftRight(): void {
         this.uiState = this.uiState === 'left' ? 'right' : 'left';
         if (!this.embed) {
             LocalStorage.setItem('uiState', this.uiState);
@@ -1697,11 +1704,11 @@ export class KlApp {
         this.updateUi();
     }
 
-    saveAsPsd (): void {
+    saveAsPsd(): void {
         this.saveToComputer.save('psd');
     }
 
-    isDrawing (): boolean {
+    isDrawing(): boolean {
         return this.lineSanitizer.getIsDrawing() || this.klCanvasWorkspace.getIsDrawing();
     }
 }

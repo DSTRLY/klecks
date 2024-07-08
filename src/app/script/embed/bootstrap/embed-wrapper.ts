@@ -1,16 +1,16 @@
-import {Embed, IEmbedParams, IReadPSD} from '../../main-embed';
-import {IKlProject} from '../../klecks/kl-types';
+import { Embed, IEmbedParams, IReadPSD } from '../../main-embed';
+import { IKlProject } from '../../klecks/kl-types';
 import logoImg from '/src/app/img/klecks-logo.png';
-import {getEmbedUrl} from './get-embed-url';
-import {initLANG, LANG} from '../../language/language';
-import {theme} from '../../theme/theme';
-import {loadAgPsd} from '../../klecks/storage/load-ag-psd';
+import { getEmbedUrl } from './get-embed-url';
+import { initLANG, LANG } from '../../language/language';
+import { theme } from '../../theme/theme';
+import { loadAgPsd } from '../../klecks/storage/load-ag-psd';
 
 // only one instance can exist
 let wrapperCreated = false;
 
 // add missing props. modifies project object
-function processProject (project: IKlProject | undefined): void {
+function processProject(project: IKlProject | undefined): void {
     if (!project) {
         return;
     }
@@ -35,16 +35,22 @@ export class EmbedWrapper {
 
 
     // ------ public ------------------
-    constructor (p: IEmbedParams) {
+    constructor(p: IEmbedParams) {
         if (wrapperCreated) {
             throw new Error('Already created an embed');
         }
         wrapperCreated = true;
 
         processProject(p.project);
+        const onCloseApp = p.onCloseApp;
+        console.log('Embed Wrapper - onCloseApp', onCloseApp);
         p = {
             ...p,
             embedUrl: p.embedUrl ? p.embedUrl : getEmbedUrl(),
+            onCloseApp: () => {
+                console.log("Closing app from Embed Wrapper");
+                onCloseApp();
+            }
         };
 
         (async () => {
@@ -104,7 +110,7 @@ export class EmbedWrapper {
         loadAgPsd();
     }
 
-    openProject (project: IKlProject) {
+    openProject(project: IKlProject) {
         processProject(project);
         if (this.instance) {
             this.instance.openProject(project);
@@ -116,7 +122,7 @@ export class EmbedWrapper {
         }
     }
 
-    initError (error: string) {
+    initError(error: string) {
         if (this.instance) {
             this.instance.initError(error);
         } else {
@@ -124,7 +130,7 @@ export class EmbedWrapper {
         }
     }
 
-    async readPSD (blob: Blob)  {
+    async readPSD(blob: Blob) {
         return new Promise((resolve, reject) => {
             const item: IReadPSD = {
                 blob,

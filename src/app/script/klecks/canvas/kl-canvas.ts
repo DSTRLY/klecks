@@ -1,20 +1,20 @@
-import {BB} from '../../bb/bb';
-import {floodFillBits} from '../image-operations/flood-fill';
-import {drawShape} from '../image-operations/shape-tool';
-import {TRenderTextParam, renderText} from '../image-operations/render-text';
-import {IGradient, IKlBasicLayer, IKlProject, IRGB, IShapeToolObject, TFillSampling, TKlCanvasLayer, TMixMode} from '../kl-types';
-import {DecoyKlHistory, KlHistoryInterface, THistoryActions} from '../history/kl-history';
-import {drawProject} from './draw-project';
-import {LANG} from '../../language/language';
-import {drawGradient} from '../image-operations/gradient-tool';
-import {nullToUndefined} from '../../bb/base/base';
+import { BB } from '../../bb/bb';
+import { floodFillBits } from '../image-operations/flood-fill';
+import { drawShape } from '../image-operations/shape-tool';
+import { TRenderTextParam, renderText } from '../image-operations/render-text';
+import { IGradient, IKlBasicLayer, IKlProject, IRGB, IShapeToolObject, TFillSampling, TKlCanvasLayer, TMixMode } from '../kl-types';
+import { DecoyKlHistory, KlHistoryInterface, THistoryActions } from '../history/kl-history';
+import { drawProject } from './draw-project';
+import { LANG } from '../../language/language';
+import { drawGradient } from '../image-operations/gradient-tool';
+import { nullToUndefined } from '../../bb/base/base';
 
 
 // TODO remove in 2026
 // workaround for chrome bug https://bugs.chromium.org/p/chromium/issues/detail?id=1281185
 // reported 2021-13 (v96), fixed 2022-02 (v99)
 // affects: source-in, source-out, destination-in, destination-atop
-function workaroundForChromium1281185 (ctx: CanvasRenderingContext2D): void {
+function workaroundForChromium1281185(ctx: CanvasRenderingContext2D): void {
     ctx.save();
     ctx.fillStyle = 'rgba(0,0,0,0.01)';
     ctx.fillRect(-0.9999999, -0.9999999, 1, 1);
@@ -76,10 +76,10 @@ export class KlCanvas {
     private layerCanvasArr: KlCanvasLayer[];
     private pickCanvas: HTMLCanvasElement; // canvas to draw into for color picker
     private history: KlHistoryInterface;
-    private changeListenerArr:  (() => void)[]; // subscribers get notified when opacity changes
+    private changeListenerArr: (() => void)[]; // subscribers get notified when opacity changes
 
 
-    private init (w: number, h: number): void {
+    private init(w: number, h: number): void {
         if (!w || !h || isNaN(w) || isNaN(h) || w < 1 || h < 1) {
             throw new Error('init - invalid canvas size: ' + w + ', ' + h);
         }
@@ -87,12 +87,12 @@ export class KlCanvas {
         this.height = h;
     }
 
-    private emitChange (): void {
+    private emitChange(): void {
         // some changes don't get captured by the history - e.g. changing opacity as the user drags the slider
         this.changeListenerArr.forEach(item => item());
     }
 
-    private updateIndices (): void {
+    private updateIndices(): void {
         this.layerCanvasArr.forEach((item, index) => {
             item.index = index;
         });
@@ -100,7 +100,7 @@ export class KlCanvas {
 
     // ---- public ----
 
-    constructor (
+    constructor(
         params: {
             projectObj: IKlProject;
         } | {
@@ -163,7 +163,7 @@ export class KlCanvas {
         this.updateIndices();
     }
 
-    setHistory (h: KlHistoryInterface): void {
+    setHistory(h: KlHistoryInterface): void {
         this.history = h;
     }
 
@@ -172,7 +172,7 @@ export class KlCanvas {
      * unless layers provided.
      * @param p
      */
-    reset (
+    reset(
         p: {
             width: number;
             height: number;
@@ -188,7 +188,7 @@ export class KlCanvas {
             }[];
         }
     ): number {
-        if (!p.width || !p.height || p.width < 1 || p.height < 1 || isNaN(p.width) || isNaN(p.height) ) {
+        if (!p.width || !p.height || p.width < 1 || p.height < 1 || isNaN(p.width) || isNaN(p.height)) {
             throw new Error('invalid canvas size');
         }
 
@@ -239,19 +239,19 @@ export class KlCanvas {
         return this.layerCanvasArr.length - 1;
     }
 
-    isLayerLimitReached (): boolean {
+    isLayerLimitReached(): boolean {
         return this.layerCanvasArr.length >= MAX_LAYERS;
     }
 
-    getWidth (): number {
+    getWidth(): number {
         return this.width;
     }
 
-    getHeight (): number {
+    getHeight(): number {
         return this.height;
     }
 
-    copy (toCopyCanvas: KlCanvas): void {
+    copy(toCopyCanvas: KlCanvas): void {
         if (
             toCopyCanvas.getWidth() < 1 ||
             toCopyCanvas.getHeight() < 1 ||
@@ -288,11 +288,11 @@ export class KlCanvas {
         this.updateIndices();
     }
 
-    getLayerCount (): number {
+    getLayerCount(): number {
         return this.layerCanvasArr.length;
     }
 
-    resize (w: number, h: number, algorithm: 'smooth' | 'pixelated' = 'smooth'): boolean {
+    resize(w: number, h: number, algorithm: 'smooth' | 'pixelated' = 'smooth'): boolean {
         if (!w || !h || (w === this.width && h === this.height) || isNaN(w) || isNaN(h) || w < 1 || h < 1) {
             return false;
         }
@@ -336,7 +336,7 @@ export class KlCanvas {
      * crop / extend
      * @param p
      */
-    resizeCanvas (p: {
+    resizeCanvas(p: {
         left: number;
         top: number;
         right: number;
@@ -379,7 +379,7 @@ export class KlCanvas {
      * will be inserted on top of selected
      * @param selected
      */
-    addLayer (selected?: number): false | number {
+    addLayer(selected?: number): false | number {
         if (this.isLayerLimitReached()) {
             return false;
         }
@@ -412,7 +412,7 @@ export class KlCanvas {
         return selected;
     }
 
-    duplicateLayer (i: number): false | number {
+    duplicateLayer(i: number): false | number {
         if (!this.layerCanvasArr[i] || this.isLayerLimitReached()) {
             return false;
         }
@@ -439,7 +439,7 @@ export class KlCanvas {
         return i + 1;
     }
 
-    getLayerContext (i: number, doReturnNull?: boolean): CanvasRenderingContext2D | null {
+    getLayerContext(i: number, doReturnNull?: boolean): CanvasRenderingContext2D | null {
         if (this.layerCanvasArr[i]) {
             return BB.ctx(this.layerCanvasArr[i]);
         }
@@ -449,7 +449,7 @@ export class KlCanvas {
         throw new Error('layer of index ' + i + ' not found (in ' + this.layerCanvasArr.length + ' layers)');
     }
 
-    removeLayer (i: number): false | number {
+    removeLayer(i: number): false | number {
         if (this.layerCanvasArr[i]) {
             this.layerCanvasArr.splice(i, 1);
             this.updateIndices();
@@ -465,7 +465,7 @@ export class KlCanvas {
         return Math.max(0, i - 1);
     }
 
-    renameLayer (i: number, name: string): boolean {
+    renameLayer(i: number, name: string): boolean {
         if (this.layerCanvasArr[i]) {
             this.layerCanvasArr[i].name = name;
         } else {
@@ -481,7 +481,7 @@ export class KlCanvas {
         return true;
     }
 
-    layerOpacity (layerIndex: number, opacity: number): void {
+    layerOpacity(layerIndex: number, opacity: number): void {
         if (!this.layerCanvasArr[layerIndex]) {
             return;
         }
@@ -497,7 +497,7 @@ export class KlCanvas {
         this.emitChange();
     }
 
-    setLayerIsVisible (layerIndex: number, isVisible: boolean): void {
+    setLayerIsVisible(layerIndex: number, isVisible: boolean): void {
         if (this.layerCanvasArr[layerIndex]) {
             this.layerCanvasArr[layerIndex].isVisible = isVisible;
         } else {
@@ -511,7 +511,7 @@ export class KlCanvas {
         } as TKlCanvasHistoryEntry);
     }
 
-    moveLayer (i: number, d: number): void | number {
+    moveLayer(i: number, d: number): void | number {
         if (d === 0) {
             return;
         }
@@ -530,7 +530,7 @@ export class KlCanvas {
         }
     }
 
-    mergeLayers (layerBottomIndex: number, layerTopIndex: number, mixModeStr: TMixMode | 'as-alpha'): void | number {
+    mergeLayers(layerBottomIndex: number, layerTopIndex: number, mixModeStr: TMixMode | 'as-alpha'): void | number {
         if (
             !this.layerCanvasArr[layerBottomIndex] ||
             !this.layerCanvasArr[layerTopIndex] ||
@@ -584,7 +584,7 @@ export class KlCanvas {
         return layerBottomIndex;
     }
 
-    mergeAll (): number | false {
+    mergeAll(): number | false {
         if (this.layerCanvasArr.length === 1) {
             return false;
         }
@@ -625,7 +625,7 @@ export class KlCanvas {
         return 0;
     }
 
-    rotate (deg: number): void {
+    rotate(deg: number): void {
         while (deg < 0) {
             deg += 360;
         }
@@ -662,7 +662,7 @@ export class KlCanvas {
         this.height = temp.height;
     }
 
-    flip (isHorizontal: boolean, isVertical: boolean, layerIndex?: number): void {
+    flip(isHorizontal: boolean, isVertical: boolean, layerIndex?: number): void {
         if (!isHorizontal && !isVertical) {
             return;
         }
@@ -674,7 +674,7 @@ export class KlCanvas {
 
         for (let i = 0; i < this.layerCanvasArr.length; i++) {
 
-            if ( (layerIndex || layerIndex === 0) && i !== layerIndex) {
+            if ((layerIndex || layerIndex === 0) && i !== layerIndex) {
                 continue;
             }
 
@@ -690,7 +690,7 @@ export class KlCanvas {
         }
     }
 
-    layerFill (layerIndex: number, colorObj: IRGB, compositeOperation?: string): void {
+    layerFill(layerIndex: number, colorObj: IRGB, compositeOperation?: string): void {
         const ctx = BB.ctx(this.layerCanvasArr[layerIndex]);
         ctx.save();
         if (compositeOperation) {
@@ -744,7 +744,7 @@ export class KlCanvas {
         } as TKlCanvasHistoryEntry);
     }
 
-    floodFill (
+    floodFill(
         layerIndex: number, // index of layer to be filled
         x: number, // starting point
         y: number,
@@ -847,7 +847,7 @@ export class KlCanvas {
      * @param layerIndex
      * @param shapeObj
      */
-    drawShape (layerIndex: number, shapeObj: IShapeToolObject): void {
+    drawShape(layerIndex: number, shapeObj: IShapeToolObject): void {
         if (shapeObj.x1 === shapeObj.x2 && shapeObj.y1 === shapeObj.y2) {
             return;
         }
@@ -859,7 +859,7 @@ export class KlCanvas {
         } as TKlCanvasHistoryEntry);
     }
 
-    drawGradient (layerIndex: number, gradientObj: IGradient): void {
+    drawGradient(layerIndex: number, gradientObj: IGradient): void {
         drawGradient(BB.ctx(this.layerCanvasArr[layerIndex]), gradientObj);
         this.history.push({
             tool: ['canvas'],
@@ -868,7 +868,7 @@ export class KlCanvas {
         } as TKlCanvasHistoryEntry);
     }
 
-    text (layerIndex: number, p: TRenderTextParam): void {
+    text(layerIndex: number, p: TRenderTextParam): void {
         renderText(this.layerCanvasArr[layerIndex], BB.copyObj(p));
         this.history.push({
             tool: ['canvas'],
@@ -877,7 +877,7 @@ export class KlCanvas {
         } as TKlCanvasHistoryEntry);
     }
 
-    replaceLayer (layerIndex: number, imageData: ImageData): void {
+    replaceLayer(layerIndex: number, imageData: ImageData): void {
         const ctx = BB.ctx(this.layerCanvasArr[layerIndex]);
         ctx.putImageData(imageData, 0, 0);
         this.history.push({
@@ -887,7 +887,7 @@ export class KlCanvas {
         } as TKlCanvasHistoryEntry);
     }
 
-    clearLayer (layerIndex: number): void {
+    clearLayer(layerIndex: number): void {
         const ctx = BB.ctx(this.layerCanvasArr[layerIndex]);
         ctx.save();
         ctx.clearRect(0, 0, this.layerCanvasArr[layerIndex].width, this.layerCanvasArr[layerIndex].height);
@@ -900,7 +900,7 @@ export class KlCanvas {
         } as TKlCanvasHistoryEntry);
     }
 
-    getLayers (): {
+    getLayers(): {
         context: CanvasRenderingContext2D;
         isVisible: boolean;
         opacity: number;
@@ -918,7 +918,7 @@ export class KlCanvas {
         });
     }
 
-    getLayersFast (): {
+    getLayersFast(): {
         canvas: KlCanvasLayer;
         isVisible: boolean;
         opacity: number;
@@ -936,7 +936,7 @@ export class KlCanvas {
         });
     }
 
-    getLayerIndex (canvasObj: HTMLCanvasElement, doReturnNull?: boolean): null | number {
+    getLayerIndex(canvasObj: HTMLCanvasElement, doReturnNull?: boolean): null | number {
         for (let i = 0; i < this.layerCanvasArr.length; i++) {
             if (this.layerCanvasArr[i] === canvasObj) {
                 return i;
@@ -948,7 +948,7 @@ export class KlCanvas {
         return null;
     }
 
-    getLayer (index: number, doReturnNull?: boolean): null | TKlCanvasLayer {
+    getLayer(index: number, doReturnNull?: boolean): null | TKlCanvasLayer {
         if (this.layerCanvasArr[index]) {
             return {
                 context: BB.ctx(this.layerCanvasArr[index]),
@@ -964,7 +964,7 @@ export class KlCanvas {
         return null;
     }
 
-    getColorAt (x: number, y: number): IRGB {
+    getColorAt(x: number, y: number): IRGB {
         x = Math.floor(x);
         y = Math.floor(y);
         const ctx = BB.ctx(this.pickCanvas);
@@ -985,11 +985,11 @@ export class KlCanvas {
         return new BB.RGB(imData.data[0], imData.data[1], imData.data[2]);
     }
 
-    getCompleteCanvas (factor: number): HTMLCanvasElement {
+    getCompleteCanvas(factor: number): HTMLCanvasElement {
         return drawProject(this.getProject(), factor);
     }
 
-    getProject (): IKlProject {
+    getProject(): IKlProject {
         return {
             width: this.width,
             height: this.height,
@@ -1005,11 +1005,11 @@ export class KlCanvas {
         };
     }
 
-    getCanvasWithOnlyOneLayerByName (name: string, factor: number): HTMLCanvasElement {
+    getCanvasWithOnlyOneLayerByName(name: string, factor: number): HTMLCanvasElement {
         return drawProject(this.getProjectWithOnlyOneLayerByName(name), factor);
     }
 
-    getProjectWithOnlyOneLayerByName (name: string): IKlProject {
+    getProjectWithOnlyOneLayerByName(name: string): IKlProject {
         const layers = [];
 
         const layerByName = this.layerCanvasArr.find(layer => layer.name === name);
@@ -1032,14 +1032,14 @@ export class KlCanvas {
         };
     }
 
-    addChangeListener (func: () => void): void {
+    addChangeListener(func: () => void): void {
         if (this.changeListenerArr.includes(func)) {
             return;
         }
         this.changeListenerArr.push(func);
     }
 
-    removeChangeListener (func: () => void): void {
+    removeChangeListener(func: () => void): void {
         for (let i = 0; i < this.changeListenerArr.length; i++) {
             if (this.changeListenerArr[i] === func) {
                 this.changeListenerArr.splice(i, 1);
@@ -1048,7 +1048,7 @@ export class KlCanvas {
         }
     }
 
-    setMixMode (layerIndex: number, mixModeStr: TMixMode): void {
+    setMixMode(layerIndex: number, mixModeStr: TMixMode): void {
         if (!this.layerCanvasArr[layerIndex]) {
             throw new Error('invalid layer');
         }
@@ -1068,7 +1068,7 @@ export class KlCanvas {
      * @param layerIndex
      * @param compositeObj
      */
-    setComposite (
+    setComposite(
         layerIndex: number,
         compositeObj: null | {
             draw: (ctx: CanvasRenderingContext2D) => void;
@@ -1080,7 +1080,7 @@ export class KlCanvas {
         this.layerCanvasArr[layerIndex].compositeObj = nullToUndefined(compositeObj);
     }
 
-    destroy (): void {
+    destroy(): void {
         if (this.isDestroyed) {
             return;
         }

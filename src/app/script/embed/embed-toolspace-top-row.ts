@@ -1,8 +1,8 @@
-import {BB} from '../bb/bb';
+import { BB } from '../bb/bb';
 import uiSwapImg from '/src/app/img/ui/ui-swap-lr.svg';
 import helpImg from '/src/app/img/ui/help.svg';
-import {LANG} from '../language/language';
-import {PointerListener} from '../bb/input/pointer-listener';
+import { LANG } from '../language/language';
+import { PointerListener } from '../bb/input/pointer-listener';
 
 /**
  * Topmost row of buttons in toolspace. (embed)
@@ -16,7 +16,7 @@ export class EmbedToolspaceTopRow {
 
     // ---- public ----
 
-    constructor (p: {onSubmit: () => void; onLeftRight: () => void; onHelp: () => void}) {
+    constructor(p: { onSubmit: () => void; onLeftRight: () => void; onHelp: () => void, onCloseApp: () => void }) {
         this.rootEl = BB.el({
             className: 'kl-toolspace-row',
             css: {
@@ -25,7 +25,7 @@ export class EmbedToolspaceTopRow {
             },
         });
 
-        function createButton (p: {
+        function createButton(p: {
             title: string;
             content?: HTMLElement;
             image?: string;
@@ -107,10 +107,27 @@ export class EmbedToolspaceTopRow {
             contain: true,
         });
 
-        this.rootEl.append(submitButton.el, leftRightButton.el);
+        const closeButton = createButton({
+            onClick: p.onCloseApp,
+            title: LANG('close'),
+            content: BB.el({
+                content: LANG('close'),
+                className: 'toolspace-row-button__submit',
+                css: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '100%',
+                    height: '100%',
+                },
+            }),
+            contain: true,
+        });
+
+        this.rootEl.append(submitButton.el, leftRightButton.el, closeButton.el);
     }
 
-    getElement (): HTMLElement {
+    getElement(): HTMLElement {
         return this.rootEl;
     }
 }
