@@ -41,9 +41,9 @@ export class Embed {
 
     onProjectReady(project: IKlProject) {
         try {
-            if (this.isInitialized) {
-                throw new Error('Already called openProject');
-            }
+            // if (this.isInitialized) {
+            //     throw new Error('Already called openProject');
+            // }
             this.isInitialized = true;
 
             const saveReminder = new SaveReminder(
@@ -65,7 +65,6 @@ export class Embed {
                         url: this.p.embedUrl,
                         onSubmit: this.p.onSubmit,
                         onCloseApp: () => {
-                            console.log("Closing app from Embed");
                             this.p.onCloseApp();
                         }
                     },
@@ -109,6 +108,15 @@ export class Embed {
     openProject: Embed['onProjectReady'] = (project) => {
         this.onProjectReady(project);
     };
+
+    closeProject = () => {
+        if (this.klApp) {
+            // this.klApp.destroy();
+            this.klApp = undefined;
+        }
+
+        this.isInitialized = false;
+    }
 
     initError(error: string) {
         if (this.loadingScreenTextEl) {

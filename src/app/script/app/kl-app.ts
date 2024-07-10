@@ -788,7 +788,6 @@ export class KlApp {
         if (this.embed) {
             toolspaceTopRow = new EmbedToolspaceTopRow({
                 onCloseApp: () => {
-                    console.log("Closing app from kl-app");
                     if (typeof this.embed!.onCloseApp === 'function') {
                         this.embed!.onCloseApp();
                     }
@@ -1048,6 +1047,11 @@ export class KlApp {
             ...Object.entries(KL.brushesUI).map(([b]) => brushUiMap[b].getElement()),
         ]);
 
+        const canvasViewFit = () => {
+            this.klCanvasWorkspace.fitView(true);
+            handUi.update(this.klCanvasWorkspace.getScale(), this.klCanvasWorkspace.getAngleDeg());
+        }
+
         const handUi = new KL.HandUi({
             scale: this.klCanvasWorkspace.getScale(),
             angleDeg: 0,
@@ -1055,10 +1059,7 @@ export class KlApp {
                 this.klCanvasWorkspace.resetView(true);
                 handUi.update(this.klCanvasWorkspace.getScale(), this.klCanvasWorkspace.getAngleDeg());
             },
-            onFit: () => {
-                this.klCanvasWorkspace.fitView(true);
-                handUi.update(this.klCanvasWorkspace.getScale(), this.klCanvasWorkspace.getAngleDeg());
-            },
+            onFit: canvasViewFit,
             onAngleChange: (angleDeg, isRelative) => {
                 this.klCanvasWorkspace.setAngle(angleDeg, isRelative);
                 handUi.update(this.klCanvasWorkspace.getScale(), this.klCanvasWorkspace.getAngleDeg());
@@ -1646,6 +1647,8 @@ export class KlApp {
             window.addEventListener('gesturechange', prevent);
             window.addEventListener('gestureend', prevent);
         }
+
+        canvasViewFit();
     }
 
     // -------- interface --------

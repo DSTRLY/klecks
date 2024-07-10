@@ -36,19 +36,22 @@ export class EmbedWrapper {
 
     // ------ public ------------------
     constructor(p: IEmbedParams) {
-        if (wrapperCreated) {
-            throw new Error('Already created an embed');
-        }
+        // if (wrapperCreated) {
+        //     throw new Error('Already created an embed');
+        // }
         wrapperCreated = true;
 
         processProject(p.project);
         const onCloseApp = p.onCloseApp;
-        console.log('Embed Wrapper - onCloseApp', onCloseApp);
+
         p = {
             ...p,
             embedUrl: p.embedUrl ? p.embedUrl : getEmbedUrl(),
             onCloseApp: () => {
-                console.log("Closing app from Embed Wrapper");
+                if (this.instance) {
+                    this.instance.closeProject();
+                }
+
                 onCloseApp();
             }
         };
@@ -104,6 +107,7 @@ export class EmbedWrapper {
             if (this.psds.length) {
                 this.instance.readPSDs(this.psds);
             }
+            loadingScreen.remove();
         })();
 
         // needed for uploading. load here to prevent possible timeouts due to server cold-start
@@ -115,11 +119,20 @@ export class EmbedWrapper {
         if (this.instance) {
             this.instance.openProject(project);
         } else {
-            if (this.project) {
-                throw new Error('Already called openProject');
-            }
+            // if (this.project) {
+            //     throw new Error('Already called openProject');
+            // }
             this.project = project;
         }
+    }
+
+    closeProject() {
+        if (this.instance) {
+            this.instance.closeProject();
+        }
+
+        this.instance = undefined;
+        this.project = undefined;
     }
 
     initError(error: string) {

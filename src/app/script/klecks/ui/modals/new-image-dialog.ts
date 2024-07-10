@@ -1,15 +1,15 @@
-import {BB} from '../../../bb/bb';
-import {Select} from '../components/select';
-import {ColorOptions} from '../components/color-options';
-import {showModal} from './base/showModal';
-import {LANG} from '../../../language/language';
-import {IRGB, IRGBA} from '../../kl-types';
-import {ISize2D} from '../../../bb/bb-types';
-import {table} from '../components/table';
-import {ERASE_COLOR} from '../../brushes/erase-color';
-import {theme} from '../../../theme/theme';
+import { BB } from '../../../bb/bb';
+import { Select } from '../components/select';
+import { ColorOptions } from '../components/color-options';
+import { showModal } from './base/showModal';
+import { LANG } from '../../../language/language';
+import { IRGB, IRGBA } from '../../kl-types';
+import { ISize2D } from '../../../bb/bb-types';
+import { table } from '../components/table';
+import { ERASE_COLOR } from '../../brushes/erase-color';
+import { theme } from '../../../theme/theme';
 
-export function newImageDialog (
+export function newImageDialog(
     p: {
         currentColor: IRGB; // current color
         secondaryColor: IRGB;
@@ -33,7 +33,7 @@ export function newImageDialog (
     const onConfirm = p.onConfirm;
     const onCancel = p.onCancel;
 
-    function createRatioSize (ratioX: number, ratioY: number, width: number, height: number, padding: number): ISize2D {
+    function createRatioSize(ratioX: number, ratioY: number, width: number, height: number, padding: number): ISize2D {
         return BB.fitInto(
             ratioX,
             ratioY,
@@ -43,7 +43,7 @@ export function newImageDialog (
     }
 
     const newImDiv = BB.el();
-    const widthInput = BB.el({tagName: 'input'});
+    const widthInput = BB.el({ tagName: 'input' });
     const unitStyle = {
         color: '#888',
         fontSize: '12px',
@@ -53,7 +53,7 @@ export function newImageDialog (
         textContent: LANG('new-px'),
         css: unitStyle,
     });
-    const heightInput = BB.el({tagName: 'input'});
+    const heightInput = BB.el({ tagName: 'input' });
     const heightUnit = BB.el({
         textContent: LANG('new-px'),
         css: unitStyle,
@@ -92,7 +92,7 @@ export function newImageDialog (
             widthUnit,
         ],
         [
-            BB.el({css: {height: '5px'}}),
+            BB.el({ css: { height: '5px' } }),
             '',
             '',
         ],
@@ -116,13 +116,13 @@ export function newImageDialog (
 
     const templateWrapper = BB.el();
     //BB.appendTextDiv(templateWrapper, "Preset Resolutions: <br />");
-    const presetFitBtn = BB.el({tagName: 'button'});
+    const presetFitBtn = BB.el({ tagName: 'button' });
     templateWrapper.style.marginBottom = '10px';
-    const presetCurrentBtn = BB.el({tagName: 'button'});
-    const presetSquareBtn = BB.el({tagName: 'button'});
-    const presetLandscapeBtn = BB.el({tagName: 'button'});
-    const presetPortraitBtn = BB.el({tagName: 'button'});
-    const presetOversizeBtn = BB.el({tagName: 'button'});
+    const presetCurrentBtn = BB.el({ tagName: 'button' });
+    const presetSquareBtn = BB.el({ tagName: 'button' });
+    const presetLandscapeBtn = BB.el({ tagName: 'button' });
+    const presetPortraitBtn = BB.el({ tagName: 'button' });
+    const presetOversizeBtn = BB.el({ tagName: 'button' });
 
     presetCurrentBtn.textContent = LANG('new-current');
     presetFitBtn.textContent = LANG('new-fit');
@@ -155,11 +155,13 @@ export function newImageDialog (
         heightInput.value = '' + canvasHeight;
         updateRatio();
     };
+
     presetFitBtn.onclick = function (): void {
         widthInput.value = '' + workspaceWidth;
         heightInput.value = '' + workspaceHeight;
         updateRatio();
     };
+
     presetOversizeBtn.onclick = function (): void {
         widthInput.value = '' + (workspaceWidth + 500);
         heightInput.value = '' + (workspaceHeight + 500);
@@ -228,12 +230,12 @@ export function newImageDialog (
 
 
 
-    let backgroundRGBA = {r: 255, g: 255, b: 255, a: 1};
+    let backgroundRGBA = { r: 255, g: 255, b: 255, a: 1 };
 
     const colorOptionsArr = [
-        {r: 255, g: 255, b: 255, a: 1},
-        {r: 0, g: 0, b: 0, a: 1},
-        {r: 0, g: 0, b: 0, a: 0},
+        { r: 255, g: 255, b: 255, a: 1 },
+        { r: 0, g: 0, b: 0, a: 1 },
+        { r: 0, g: 0, b: 0, a: 0 },
         {
             r: currentColor.r,
             g: currentColor.g,
@@ -311,11 +313,11 @@ export function newImageDialog (
         },
     });
 
-    function updateRatio (): void {
+    function updateRatio(): void {
         widthInput.value = '' + Math.min(maxCanvasSize, parseInt(widthInput.value));
         heightInput.value = '' + Math.min(maxCanvasSize, parseInt(heightInput.value));
 
-        function hcf (u: number, v: number): number {
+        function hcf(u: number, v: number): number {
             let U = u, V = v;
             // eslint-disable-next-line no-constant-condition
             while (true) {
