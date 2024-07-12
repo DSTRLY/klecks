@@ -862,31 +862,33 @@ export class KlApp {
                     this.updateUi();
                 },
             });
+
+            toolspaceTopRow.getElement().style.marginBottom = '10px';
+            this.toolspaceInner.append(toolspaceTopRow.getElement());
         } else {
-            toolspaceTopRow = new KL.ToolspaceTopRow({
-                logoImg: pOptions.logoImg!,
-                onLogo: () => {
-                    showIframeModal('./home/', !!this.embed);
-                },
-                onNew: () => {
-                    showNewImageDialog();
-                },
-                onImport: () => {
-                    fileTab!.triggerImport();
-                },
-                onSave: () => {
-                    this.saveToComputer.save();
-                },
-                onShare: () => {
-                    shareImage();
-                },
-                onHelp: () => {
-                    showIframeModal('./help/', !!this.embed);
-                },
-            });
+            //     toolspaceTopRow = new KL.ToolspaceTopRow({
+            //         logoImg: pOptions.logoImg!,
+            //         onLogo: () => {
+            //             showIframeModal('./home/', !!this.embed);
+            //         },
+            //         onNew: () => {
+            //             showNewImageDialog();
+            //         },
+            //         onImport: () => {
+            //             fileTab!.triggerImport();
+            //         },
+            //         onSave: () => {
+            //             this.saveToComputer.save();
+            //         },
+            //         onShare: () => {
+            //             shareImage();
+            //         },
+            //         onHelp: () => {
+            //             showIframeModal('./help/', !!this.embed);
+            //         },
+            //     });
         }
-        toolspaceTopRow.getElement().style.marginBottom = '10px';
-        this.toolspaceInner.append(toolspaceTopRow.getElement());
+
 
         this.toolspaceToolRow = new KL.ToolspaceToolRow({
             onActivate: (activeStr) => {
