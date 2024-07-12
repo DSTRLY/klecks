@@ -84,8 +84,7 @@ export class EmbedWrapper {
             }
             loadingScreen.id = 'loading-screen';
             const logoStyle = theme.isDark() && !p.logoImg ? ' style="filter: invert(1)"' : '';
-            loadingScreen.innerHTML = '<img width="150" height="54"' + logoStyle + ' src="' + (p.logoImg ? p.logoImg : logoImg) + '" alt="Logo"/>\n' +
-                '<div style="margin: 15px 0 0 0; display: flex; align-items: center">\n' +
+            loadingScreen.innerHTML = '<div style="margin: 15px 0 0 0; display: flex; align-items: center">\n' +
                 '<div class="spinner"></div>\n' +
                 '<span id="loading-screen-text">' + LANG('embed-init-loading') + '</span>' +
                 '</div>';
