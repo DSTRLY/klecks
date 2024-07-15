@@ -1,16 +1,16 @@
-import {BB} from '../../bb/bb';
-import {brushes} from '../brushes/brushes';
-import {eventResMs} from './brushes-consts';
-import {klHistory} from '../history/kl-history';
-import {Checkbox} from '../ui/components/checkbox';
-import {KlSlider} from '../ui/components/kl-slider';
-import {createPenPressureToggle} from '../ui/components/create-pen-pressure-toggle';
+import { BB } from '../../bb/bb';
+import { brushes } from '../brushes/brushes';
+import { eventResMs } from './brushes-consts';
+import { klHistory } from '../history/kl-history';
+import { Checkbox } from '../ui/components/checkbox';
+import { KlSlider } from '../ui/components/kl-slider';
+import { createPenPressureToggle } from '../ui/components/create-pen-pressure-toggle';
 import brushIconImg from '/src/app/img/ui/brush-pen.svg';
-import {genBrushAlpha01, genBrushAlpha02} from '../brushes/alphas/brush-alphas';
-import {IBrushUi} from '../kl-types';
-import {LANG, languageStrings} from '../../language/language';
-import {Options} from '../ui/components/options';
-import {PenBrush} from '../brushes/pen-brush';
+import { genBrushAlpha01, genBrushAlpha02 } from '../brushes/alphas/brush-alphas';
+import { IBrushUi } from '../kl-types';
+import { LANG, languageStrings } from '../../language/language';
+import { Options } from '../ui/components/options';
+import { PenBrush } from '../brushes/pen-brush';
 
 
 export const penBrushUi = (function () {
@@ -23,9 +23,9 @@ export const penBrushUi = (function () {
             curve: BB.quadraticSplineInput(0.5, 100, 0.1),
         },
         opacitySlider: {
-            min: 1/100,
+            min: 1 / 100,
             max: 1,
-            curve: [[0, 1/100], [0.5, 30/100], [1, 1]],
+            curve: [[0, 1 / 100], [0.5, 30 / 100], [1, 1]],
         },
     } as IBrushUi<PenBrush>;
 
@@ -110,19 +110,19 @@ export const penBrushUi = (function () {
 
         const spacingSpline = new BB.SplineInterpolator([[0, 15], [8, 7], [14, 4], [30, 3], [50, 2.7], [100, 2]]);
 
-        function setSize (size: number) {
+        function setSize(size: number) {
             brush.setSize(size);
             brush.setSpacing(Math.max(2, spacingSpline.interpolate(size)) / 15);
         }
 
-        function init () {
+        function init() {
             sizeSlider = new KlSlider({
                 label: LANG('brush-size'),
                 width: 225,
                 height: 30,
                 min: brushInterface.sizeSlider.min,
                 max: brushInterface.sizeSlider.max,
-                value: brush.getSize(),
+                value: 24.5,
                 curve: brushInterface.sizeSlider.curve,
                 eventResMs: eventResMs,
                 toDisplayValue: (val) => val * 2,
