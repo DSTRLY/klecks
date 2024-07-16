@@ -95,6 +95,7 @@ export class EmbedWrapper {
 
             this.getPNG = () => this.instance!.getPNG();
             this.getPNGOfLayerByName = (name: string) => this.instance!.getPNGOfLayerByName(name);
+            this.getWebPOfLayerByName = (name: string) => this.instance!.getWebPOfLayerByName(name);
             this.getPSD = () => this.instance!.getPSD();
 
             if (this.project) {
@@ -165,5 +166,6 @@ export class EmbedWrapper {
 
     getPNG: (() => Blob) | undefined = undefined;
     getPNGOfLayerByName: ((name: string) => Blob) | undefined = undefined;
+    getWebPOfLayerByName: ((name: string) => Blob) | undefined = undefined;
     getPSD: (() => Promise<Blob>) | undefined = undefined;
 }

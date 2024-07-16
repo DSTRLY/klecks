@@ -1693,6 +1693,10 @@ export class KlApp {
         return base64ToBlob(this.klCanvas.getCanvasWithOnlyOneLayerByName(name, 1).toDataURL('image/png'));
     }
 
+    getWebPOfLayerByName(name: string): Blob {
+        return base64ToBlob(this.klCanvas.getCanvasWithOnlyOneLayerByName(name, 1).toDataURL('image/webp'));
+    }
+
     getPSD = async (): Promise<Blob> => {
         return await klCanvasToPsdBlob(this.klCanvas);
     };

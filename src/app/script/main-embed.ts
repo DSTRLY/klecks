@@ -141,6 +141,13 @@ export class Embed {
         return this.klApp.getPNGOfLayerByName(name);
     }
 
+    getWebPOfLayerByName(name: string): Blob {
+        if (!this.klApp) {
+            throw new Error('App not initialized');
+        }
+        return this.klApp.getWebPOfLayerByName(name);
+    }
+
     async getPSD(): Promise<Blob> {
         if (!this.klApp) {
             throw new Error('App not initialized');
