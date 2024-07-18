@@ -995,18 +995,18 @@ export class KlApp {
                 alignItems: 'flex-end',
             },
         });
-        const toolspaceStabilizerRow = new KL.ToolspaceStabilizerRow({
-            smoothing: 1,
-            onSelect: (v) => {
-                lineSmoothing.setSmoothing(translateSmoothing(v));
-            },
-        });
+        // const toolspaceStabilizerRow = new KL.ToolspaceStabilizerRow({
+        //     smoothing: 1,
+        //     onSelect: (v) => {
+        //         lineSmoothing.setSmoothing(translateSmoothing(v));
+        //     },
+        // });
 
 
         brushDiv.append(colorDiv);
         BB.append(
             colorDiv,
-            [this.klColorSlider.getElement(), this.klColorSlider.getOutputElement(), toolspaceStabilizerRow.getElement()]
+            [this.klColorSlider.getElement(), this.klColorSlider.getOutputElement()]
         );
 
         const brushTabRow = new KL.TabRow({
@@ -1336,7 +1336,7 @@ export class KlApp {
                         }
                         BB.append(
                             colorDiv,
-                            [this.klColorSlider.getElement(), this.klColorSlider.getOutputElement(), toolspaceStabilizerRow.getElement()]
+                            [this.klColorSlider.getElement(), this.klColorSlider.getOutputElement()]
                         );
                         brushDiv.style.display = 'block';
                     },
