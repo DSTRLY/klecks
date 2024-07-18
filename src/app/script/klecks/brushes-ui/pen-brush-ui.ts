@@ -206,6 +206,10 @@ export const penBrushUi = (function () {
 
         init();
 
+        // set the initial brush stroke size
+        setSize(24.5);
+        p.onSizeChange(24.5);
+
         this.increaseSize = function (f) {
             if (!brush.isDrawing()) {
                 sizeSlider.changeSliderValue(f);
