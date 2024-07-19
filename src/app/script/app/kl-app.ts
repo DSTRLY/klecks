@@ -1720,4 +1720,9 @@ export class KlApp {
     isDrawing(): boolean {
         return this.lineSanitizer.getIsDrawing() || this.klCanvasWorkspace.getIsDrawing();
     }
+
+    destroy() {
+        klHistory.clearHistory();
+        this.klCanvas.destroy();
+    }
 }

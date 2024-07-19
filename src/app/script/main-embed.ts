@@ -111,7 +111,7 @@ export class Embed {
 
     closeProject = () => {
         if (this.klApp) {
-            // this.klApp.destroy();
+            this.klApp.destroy();
             this.klApp = undefined;
         }
 
