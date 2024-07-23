@@ -109,9 +109,9 @@ export class EmbedToolspaceTopRow {
 
         const closeButton = createButton({
             onClick: p.onCloseApp,
-            title: LANG('close'),
+            title: LANG('exit-title'),
             content: BB.el({
-                content: LANG('close'),
+                content: LANG('exit-content'),
                 className: 'toolspace-row-button__submit',
                 css: {
                     display: 'flex',
