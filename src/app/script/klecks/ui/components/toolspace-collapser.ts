@@ -28,7 +28,7 @@ export class ToolspaceCollapser {
             onChange: () => void;
         }
     ) {
-        this.stateIsOpen = false;
+        this.stateIsOpen = true;
         this.directionStr = 'right';
 
         this.rootEl = BB.el({

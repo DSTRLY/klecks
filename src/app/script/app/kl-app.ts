@@ -98,7 +98,7 @@ export class KlApp {
     private updateCollapse(): void {
 
         //collapser
-        if (this.uiWidth < this.collapseThreshold) {
+        // if (this.uiWidth < this.collapseThreshold) {
             this.toolspaceCollapser.getElement().style.display = 'block';
 
             this.toolspaceCollapser.setDirection(this.uiState);
@@ -148,21 +148,21 @@ export class KlApp {
 
             }
 
-        } else {
-            this.toolspaceCollapser.getElement().style.display = 'none';
-            if (this.uiState === 'left') {
-                BB.css(this.klCanvasWorkspace.getElement(), {
-                    left: '271px',
-                });
-            } else {
-                BB.css(this.klCanvasWorkspace.getElement(), {
-                    left: '0',
-                });
-            }
-            this.toolspace.style.display = 'block';
-            this.klCanvasWorkspace.setSize(Math.max(0, this.uiWidth - this.toolWidth), this.uiHeight);
-            this.statusOverlay.setWide(false);
-        }
+        // } else {
+        //     this.toolspaceCollapser.getElement().style.display = 'none';
+        //     if (this.uiState === 'left') {
+        //         BB.css(this.klCanvasWorkspace.getElement(), {
+        //             left: '271px',
+        //         });
+        //     } else {
+        //         BB.css(this.klCanvasWorkspace.getElement(), {
+        //             left: '0',
+        //         });
+        //     }
+        //     this.toolspace.style.display = 'block';
+        //     this.klCanvasWorkspace.setSize(Math.max(0, this.uiWidth - this.toolWidth), this.uiHeight);
+        //     this.statusOverlay.setWide(false);
+        // }
     }
 
     private updateBottomBar(): void {
