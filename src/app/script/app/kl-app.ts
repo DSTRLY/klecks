@@ -788,9 +788,17 @@ export class KlApp {
         if (this.embed) {
             toolspaceTopRow = new EmbedToolspaceTopRow({
                 onCloseApp: () => {
-                    if (typeof this.embed!.onCloseApp === 'function') {
-                        this.embed!.onCloseApp();
-                    }
+                    KL.popup({
+                        target: this.klRootEl,
+                        message: LANG('close-app-prompt'),
+                        buttons: [LANG('close-app'), 'Cancel'],
+                        callback: (result) => {
+                            if (result === LANG('close-app') && typeof this.embed!.onCloseApp === 'function') {
+                                this.embed!.onCloseApp();
+                            }
+                        }
+                    })
+                    
                 },
                 onHelp: () => {
                     showIframeModal(this.embed!.url + '/help.html', !!this.embed);

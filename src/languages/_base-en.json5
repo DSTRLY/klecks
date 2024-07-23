@@ -17,6 +17,8 @@ renaming keys across language files:
   },
   "exit-title": "Exit without saving",
   "exit-content": "Exit",
+  "close-app-prompt": "Exit without saving?",
+  "close-app": "Exit",
   "toggle-show-tools": {
     hint: "Button that hides/shows the toolbar.",
     value: "Show/Hide Tools",
