@@ -878,14 +878,14 @@ renaming keys across language files:
     value: "You can backup your drawing.",
   },
 
-  submit: "Save",
+  submit: "Save Signature",
   "submit-title": {
     hint: 'tooltip when hovering "Save" button',
     value: "Save Signature",
   },
   "submit-prompt": {
     hint: "Dialog asking for confirmation",
-    value: "Save drawing?",
+    value: "Save Signature?",
   },
   "submit-submitting": {
     hint: "in the process of uploading",
