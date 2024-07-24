@@ -12,6 +12,8 @@ import { LANG, languageStrings } from '../../language/language';
 import { Options } from '../ui/components/options';
 import { PenBrush } from '../brushes/pen-brush';
 
+const PEN_INITIAL_SIZE = 25.5;
+const PEN_INITIAL_OPACITY = 0.9;
 
 export const penBrushUi = (function () {
     const brushInterface = {
@@ -122,7 +124,7 @@ export const penBrushUi = (function () {
                 height: 30,
                 min: brushInterface.sizeSlider.min,
                 max: brushInterface.sizeSlider.max,
-                value: 24.5,
+                value: PEN_INITIAL_SIZE,
                 curve: brushInterface.sizeSlider.curve,
                 eventResMs: eventResMs,
                 toDisplayValue: (val) => val * 2,
@@ -146,7 +148,7 @@ export const penBrushUi = (function () {
                 height: 30,
                 min: brushInterface.opacitySlider.min,
                 max: brushInterface.opacitySlider.max,
-                value: brushInterface.opacitySlider.max,
+                value: PEN_INITIAL_OPACITY,
                 curve: brushInterface.opacitySlider.curve,
                 eventResMs: eventResMs,
                 toDisplayValue: (val) => val * 100,
@@ -207,8 +209,10 @@ export const penBrushUi = (function () {
         init();
 
         // set the initial brush stroke size
-        setSize(24.5);
-        p.onSizeChange(24.5);
+        setSize(PEN_INITIAL_SIZE);
+        p.onSizeChange(PEN_INITIAL_SIZE);
+        brush.setOpacity(PEN_INITIAL_OPACITY);
+        p.onOpacityChange(PEN_INITIAL_OPACITY);
 
         this.increaseSize = function (f) {
             if (!brush.isDrawing()) {
