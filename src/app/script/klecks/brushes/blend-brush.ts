@@ -32,8 +32,8 @@ export class BlendBrush {
 
     private context: CanvasRenderingContext2D = {} as CanvasRenderingContext2D;
     private color: IRGB = {} as IRGB;
-    private size: number = 29; // radius - 0.5 - 99999
-    private opacity: number = 0.6; // 0-1
+    private size: number = 30; // radius - 0.5 - 99999
+    private opacity: number = 0.88; // 0-1
     private blending: number = 0.65; // 0-1
 
     private settingLockLayerAlpha: boolean = false;

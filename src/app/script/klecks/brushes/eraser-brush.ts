@@ -13,7 +13,7 @@ export interface IEraserBrushHistoryEntry extends IHistoryEntry {
 
 export class EraserBrush {
 
-    private size: number = 30;
+    private size: number = 135.5;
     private spacing: number = 0.4;
     private opacity: number = 1;
     private useSizePressure: boolean = true;

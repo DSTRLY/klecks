@@ -49,7 +49,7 @@ export const blendBrushUi = (function () {
                 height: 30,
                 min: brushInterface.sizeSlider.min,
                 max: brushInterface.sizeSlider.max,
-                value: 58,
+                value: brush.getSize(),
                 curve: brushInterface.sizeSlider.curve,
                 eventResMs: eventResMs,
                 toDisplayValue: (val) => val * 2,

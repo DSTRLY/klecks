@@ -25,9 +25,9 @@ export class PenBrush {
 
     private settingHasOpacityPressure: boolean = false;
     private settingHasSizePressure: boolean = true;
-    private settingSize: number = 2;
+    private settingSize: number = 25.5;
     private settingSpacing: number = 0.8489;
-    private settingOpacity: number = 1;
+    private settingOpacity: number = 0.9;
     private settingColor: IRGB = {} as IRGB;
     private settingColorStr: string = '';
     private settingAlphaId: number = ALPHA_CIRCLE;
