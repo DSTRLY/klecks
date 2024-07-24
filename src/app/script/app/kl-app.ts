@@ -1018,7 +1018,7 @@ export class KlApp {
         );
 
         const brushTabRow = new KL.TabRow({
-            initialId: 'penBrush',
+            initialId: 'blendBrush',
             useAccent: true,
             tabArr: (() => {
                 const result = [];
