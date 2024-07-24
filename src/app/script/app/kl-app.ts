@@ -275,7 +275,7 @@ export class KlApp {
         });
 
 
-        let currentColor = new BB.RGB(0, 0, 0);
+        let currentColor = new BB.RGB(ERASE_COLOR, ERASE_COLOR, ERASE_COLOR);
         let currentBrushUi: any; // todo
         let currentBrushId: string;
         let lastNonEraserBrushId: string;
@@ -950,7 +950,7 @@ export class KlApp {
             width: 250,
             height: 30,
             svHeight: 100,
-            startValue: new BB.RGB(0, 0, 0),
+            startValue: new BB.RGB(ERASE_COLOR, ERASE_COLOR, ERASE_COLOR),
             onPick: setBrushColor,
         });
         this.klColorSlider.setHeight(Math.max(163, Math.min(400, this.uiHeight - 505)));
