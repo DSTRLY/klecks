@@ -937,7 +937,7 @@ export class KlApp {
             this.toolspaceToolRow.setEnableUndo(klHistory.canUndo());
             this.toolspaceToolRow.setEnableRedo(klHistory.canRedo());
         });
-        this.toolspaceInner.append(this.toolspaceToolRow.getElement());
+        // this.toolspaceInner.append(this.toolspaceToolRow.getElement());
 
         const setBrushColor = (p_color: IRGB) => {
             currentColor = p_color;
@@ -1011,12 +1011,6 @@ export class KlApp {
         // });
 
 
-        brushDiv.append(colorDiv);
-        BB.append(
-            colorDiv,
-            [this.klColorSlider.getElement(), this.klColorSlider.getOutputElement()]
-        );
-
         const brushTabRow = new KL.TabRow({
             initialId: 'blendBrush',
             useAccent: true,
@@ -1056,6 +1050,12 @@ export class KlApp {
             brushTabRow.getElement(),
             ...Object.entries(KL.brushesUI).map(([b]) => brushUiMap[b].getElement()),
         ]);
+
+        brushDiv.append(colorDiv);
+        BB.append(
+            colorDiv,
+            [this.klColorSlider.getElement(), this.klColorSlider.getOutputElement()]
+        );
 
         const canvasViewFit = () => {
             this.klCanvasWorkspace.fitView(true);

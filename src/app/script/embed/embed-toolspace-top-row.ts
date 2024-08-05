@@ -100,12 +100,12 @@ export class EmbedToolspaceTopRow {
         //     contain: true,
         // });
 
-        const leftRightButton = createButton({
-            onClick: p.onLeftRight,
-            title: LANG('switch-ui-left-right'),
-            image: uiSwapImg,
-            contain: true,
-        });
+        // const leftRightButton = createButton({
+        //     onClick: p.onLeftRight,
+        //     title: LANG('switch-ui-left-right'),
+        //     image: uiSwapImg,
+        //     contain: true,
+        // });
 
         const closeButton = createButton({
             onClick: p.onCloseApp,
@@ -124,7 +124,7 @@ export class EmbedToolspaceTopRow {
             contain: true,
         });
 
-        this.rootEl.append(submitButton.el, leftRightButton.el, closeButton.el);
+        this.rootEl.append(submitButton.el, closeButton.el);
     }
 
     getElement(): HTMLElement {
