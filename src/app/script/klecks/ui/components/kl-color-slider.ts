@@ -16,8 +16,8 @@ export class KlColorSlider {
     private readonly rootEl: HTMLElement;
     private readonly outputDiv: HTMLElement;
     private readonly divPreview: HTMLElement;
-    private readonly hexButton: HTMLElement;
-    private readonly secondaryColorBtn: HTMLElement;
+    // private readonly hexButton: HTMLElement;
+    // private readonly secondaryColorBtn: HTMLElement;
     private primaryColorRGB: RGB;
     private primaryColorHSV: HSV;
     private secondaryColorRGB: RGB;
@@ -70,22 +70,22 @@ export class KlColorSlider {
             BB.css(this.pickerButton, {
                 filter: 'invert(1)',
             });
-            BB.css(this.hexButton, {
-                filter: 'invert(1)',
-            });
+            // BB.css(this.hexButton, {
+            //     filter: 'invert(1)',
+            // });
         } else{
             BB.css(this.pickerButton, {
                 filter: '',
             });
-            BB.css(this.hexButton, {
-                filter: '',
-            });
+            // BB.css(this.hexButton, {
+            //     filter: '',
+            // });
         }
 
     }
 
     private updateSecondaryColor (): void {
-        this.secondaryColorBtn.style.backgroundColor = BB.ColorConverter.toRgbStr(this.secondaryColorRGB);
+        // this.secondaryColorBtn.style.backgroundColor = BB.ColorConverter.toRgbStr(this.secondaryColorRGB);
     }
 
 
@@ -162,7 +162,7 @@ export class KlColorSlider {
             css: {
                 display: 'flex',
                 justifyContent: 'space-between',
-                width: (this.height * 2.5) + 'px',
+                width: this.height + 'px',
                 height: this.height + 'px',
             },
         });
@@ -304,36 +304,36 @@ export class KlColorSlider {
         this.divPreview.append(this.pickerButton);
 
 
-        this.hexButton = BB.el({
-            content: '#',
-            className: 'color-picker-preview-button',
-            title: LANG('manual-color-input'),
-            css: {
-                height: '100%',
-                width: this.height + 'px',
-                lineHeight: this.height + 'px',
-                fontSize: (this.height * 0.65) + 'px',
-            },
-            onClick: () => {
-                new HexColorDialog({
-                    color: new BB.RGB(this.primaryColorRGB.r, this.primaryColorRGB.g, this.primaryColorRGB.b),
-                    onClose: (rgbObj) => {
-                        if (!rgbObj) {
-                            return;
-                        }
-                        this.setColor(rgbObj);
-                        this.emitColor(new BB.RGB(this.primaryColorRGB.r, this.primaryColorRGB.g, this.primaryColorRGB.b));
-                    },
-                });
-            },
-        });
-        const hexButtonPointerListener = new BB.PointerListener({
-            target: this.hexButton,
-            onEnterLeave: (isOver) => {
-                this.hexButton.classList.toggle('color-picker-preview-button-hover', isOver);
-            },
-        });
-        this.divPreview.append(this.hexButton);
+        // this.hexButton = BB.el({
+        //     content: '#',
+        //     className: 'color-picker-preview-button',
+        //     title: LANG('manual-color-input'),
+        //     css: {
+        //         height: '100%',
+        //         width: this.height + 'px',
+        //         lineHeight: this.height + 'px',
+        //         fontSize: (this.height * 0.65) + 'px',
+        //     },
+        //     onClick: () => {
+        //         new HexColorDialog({
+        //             color: new BB.RGB(this.primaryColorRGB.r, this.primaryColorRGB.g, this.primaryColorRGB.b),
+        //             onClose: (rgbObj) => {
+        //                 if (!rgbObj) {
+        //                     return;
+        //                 }
+        //                 this.setColor(rgbObj);
+        //                 this.emitColor(new BB.RGB(this.primaryColorRGB.r, this.primaryColorRGB.g, this.primaryColorRGB.b));
+        //             },
+        //         });
+        //     },
+        // });
+        // const hexButtonPointerListener = new BB.PointerListener({
+        //     target: this.hexButton,
+        //     onEnterLeave: (isOver) => {
+        //         this.hexButton.classList.toggle('color-picker-preview-button-hover', isOver);
+        //     },
+        // });
+        // this.divPreview.append(this.hexButton);
 
         this.setColPreview();
 
@@ -453,21 +453,21 @@ export class KlColorSlider {
 
         // --- secondary color ---
 
-        this.secondaryColorBtn = BB.el({
-            parent: this.outputDiv,
-            title: LANG('secondary-color') + ' [X]',
-            className: 'kl-color-picker__secondary',
-            css: {
-                cursor: 'pointer',
-                marginLeft: '5px',
-                width: '22px',
-                height: '22px',
-            },
-            onClick: (e) => {
-                e.preventDefault();
-                this.swapColors();
-            },
-        });
+        // this.secondaryColorBtn = BB.el({
+        //     parent: this.outputDiv,
+        //     title: LANG('secondary-color') + ' [X]',
+        //     className: 'kl-color-picker__secondary',
+        //     css: {
+        //         cursor: 'pointer',
+        //         marginLeft: '5px',
+        //         width: '22px',
+        //         height: '22px',
+        //     },
+        //     onClick: (e) => {
+        //         e.preventDefault();
+        //         this.swapColors();
+        //     },
+        // });
         this.updateSecondaryColor();
     }
 
