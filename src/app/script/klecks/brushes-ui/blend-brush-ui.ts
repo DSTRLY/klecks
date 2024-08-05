@@ -98,19 +98,19 @@ export const blendBrushUi = (function () {
                 brush.setOpacityPressure(b);
             });
 
-            const lockAlphaToggle = new Checkbox({
-                init: brush.getLockAlpha(),
-                label: LANG('lock-alpha'),
-                callback: function (b) {
-                    brush.setLockAlpha(b);
-                },
-                doHighlight: true,
-                title: LANG('lock-alpha-title'),
-                css: {
-                    marginTop: '10px',
-                    display: 'inline-block',
-                },
-            });
+            // const lockAlphaToggle = new Checkbox({
+            //     init: brush.getLockAlpha(),
+            //     label: LANG('lock-alpha'),
+            //     callback: function (b) {
+            //         brush.setLockAlpha(b);
+            //     },
+            //     doHighlight: true,
+            //     title: LANG('lock-alpha-title'),
+            //     css: {
+            //         marginTop: '10px',
+            //         display: 'inline-block',
+            //     },
+            // });
 
 
             div.append(
@@ -138,7 +138,7 @@ export const blendBrushUi = (function () {
                     },
                 }),
                 blendingSlider.getElement(),
-                lockAlphaToggle.getElement()
+                // lockAlphaToggle.getElement()
             );
         }
 

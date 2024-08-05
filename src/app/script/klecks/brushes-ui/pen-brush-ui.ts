@@ -94,18 +94,18 @@ export const penBrushUi = (function () {
             },
         });
 
-        const lockAlphaToggle = new Checkbox({
-            init: brush.getLockAlpha(),
-            label: LANG('lock-alpha'),
-            callback: function (b) {
-                brush.setLockAlpha(b);
-            },
-            doHighlight: true,
-            title: LANG('lock-alpha-title'),
-            css: {
-                display: 'inline-block',
-            },
-        });
+        // const lockAlphaToggle = new Checkbox({
+        //     init: brush.getLockAlpha(),
+        //     label: LANG('lock-alpha'),
+        //     callback: function (b) {
+        //         brush.setLockAlpha(b);
+        //     },
+        //     doHighlight: true,
+        //     title: LANG('lock-alpha-title'),
+        //     css: {
+        //         display: 'inline-block',
+        //     },
+        // });
 
         const spacingSpline = new BB.SplineInterpolator([[0, 15], [8, 7], [14, 4], [30, 3], [50, 2.7], [100, 2]]);
 
@@ -187,18 +187,18 @@ export const penBrushUi = (function () {
                         alignItems: 'center',
                     },
                 }),
-                BB.el({
-                    content: alphaOptions.getElement(),
-                    css: {
-                        marginTop: '10px',
-                    },
-                }),
-                BB.el({
-                    content: lockAlphaToggle.getElement(),
-                    css: {
-                        marginTop: '10px',
-                    },
-                }),
+                // BB.el({
+                //     content: alphaOptions.getElement(),
+                //     css: {
+                //         marginTop: '10px',
+                //     },
+                // }),
+                // BB.el({
+                //     content: lockAlphaToggle.getElement(),
+                //     css: {
+                //         marginTop: '10px',
+                //     },
+                // }),
             );
 
         }

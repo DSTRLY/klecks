@@ -117,18 +117,18 @@ export const eraserBrushUi = (function () {
                 })
             );
 
-            const transparencyToggle = new Checkbox({
-                init: false,
-                label: LANG('brush-eraser-transparent-bg'),
-                callback: function (b) {
-                    isTransparentBg = b;
-                    brush.setTransparentBG(b);
-                },
-                css: {
-                    marginTop: '10px',
-                },
-            });
-            div.append(transparencyToggle.getElement());
+            // const transparencyToggle = new Checkbox({
+            //     init: false,
+            //     label: LANG('brush-eraser-transparent-bg'),
+            //     callback: function (b) {
+            //         isTransparentBg = b;
+            //         brush.setTransparentBG(b);
+            //     },
+            //     css: {
+            //         marginTop: '10px',
+            //     },
+            // });
+            // div.append(transparencyToggle.getElement());
         }
 
         init();

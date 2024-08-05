@@ -38,15 +38,15 @@ export const smudgeBrushUi = (function () {
         let sizeSlider: KlSlider;
         let opacitySlider: KlSlider;
 
-        const lockAlphaToggle = new Checkbox({
-            init: brush.getLockAlpha(),
-            label: LANG('lock-alpha'),
-            callback: function (b) {
-                brush.setLockAlpha(b);
-            },
-            doHighlight: true,
-            title: LANG('lock-alpha-title'),
-        });
+        // const lockAlphaToggle = new Checkbox({
+        //     init: brush.getLockAlpha(),
+        //     label: LANG('lock-alpha'),
+        //     callback: function (b) {
+        //         brush.setLockAlpha(b);
+        //     },
+        //     doHighlight: true,
+        //     title: LANG('lock-alpha-title'),
+        // });
 
         const spacingSpline = new BB.SplineInterpolator([[0, 15], [8, 7], [14, 4], [30, 3], [50, 2.7], [100, 2]]);
 
@@ -136,7 +136,7 @@ export const smudgeBrushUi = (function () {
                     marginTop: '10px',
                 },
             });
-            bottomRow.append(lockAlphaToggle.getElement());
+            // bottomRow.append(lockAlphaToggle.getElement());
 
         }
 

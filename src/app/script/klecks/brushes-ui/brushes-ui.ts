@@ -18,7 +18,7 @@ export const brushesUI: {
 } = {
     blendBrush: blendBrushUi,
     penBrush: penBrushUi,
-    sketchyBrush: sketchyBrushUi,
+    // sketchyBrush: sketchyBrushUi,
     // pixelBrush: pixelBrushUi,
     // chemyBrush: chemyBrushUi,
     smudgeBrush: smudgeBrushUi,
