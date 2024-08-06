@@ -11,10 +11,11 @@ import { IBrushUi } from '../kl-types';
 import { LANG, languageStrings } from '../../language/language';
 import { Options } from '../ui/components/options';
 import { PenBrush } from '../brushes/pen-brush';
+import { emojiToSvg } from '../utils/emojiToSvg';
 
 export const penBrushUi = (function () {
     const brushInterface = {
-        image: brushIconImg,
+        image: emojiToSvg('🖊️'),
         tooltip: LANG('brush-pen'),
         sizeSlider: {
             min: 0.5,
@@ -46,6 +47,8 @@ export const penBrushUi = (function () {
 
     brushInterface.Ui = function (p) {
         const div = document.createElement('div'); // the gui
+        div.style.height = '150px';
+
         const brush = new brushes.PenBrush();
         brush.setHistory(klHistory);
         p.onSizeChange(brush.getSize());
@@ -167,7 +170,7 @@ export const penBrushUi = (function () {
                 BB.el({
                     content: [
                         sizeSlider.getElement(),
-                        pressureSizeToggle,
+                        // pressureSizeToggle,
                     ],
                     css: {
                         display: 'flex',
@@ -179,7 +182,7 @@ export const penBrushUi = (function () {
                 BB.el({
                     content: [
                         opacitySlider.getElement(),
-                        pressureOpacityToggle,
+                        // pressureOpacityToggle,
                     ],
                     css: {
                         display: 'flex',

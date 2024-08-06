@@ -5,7 +5,7 @@ import {klHistory} from '../history/kl-history';
 import {KlSlider} from '../ui/components/kl-slider';
 import {createPenPressureToggle} from '../ui/components/create-pen-pressure-toggle';
 import {Checkbox} from '../ui/components/checkbox';
-import brushIconImg from '/src/app/img/ui/brush-eraser.svg';
+import brushIconImg from '/src/app/img/ui/brush-eraser-2.svg';
 import {IBrushUi} from '../kl-types';
 import {LANG, languageStrings} from '../../language/language';
 import {EraserBrush} from '../brushes/eraser-brush';
@@ -31,6 +31,8 @@ export const eraserBrushUi = (function () {
 
     brushInterface.Ui = function (p) {
         const div = document.createElement('div'); // the gui
+        div.style.height = '150px';
+
         const brush = new brushes.EraserBrush();
         brush.setHistory(klHistory);
         p.onSizeChange(brush.getSize());
@@ -95,7 +97,7 @@ export const eraserBrushUi = (function () {
                 BB.el({
                     content: [
                         sizeSlider.getElement(),
-                        pressureSizeToggle,
+                        // pressureSizeToggle,
                     ],
                     css: {
                         display: 'flex',
@@ -107,7 +109,7 @@ export const eraserBrushUi = (function () {
                 BB.el({
                     content: [
                         opacitySlider.getElement(),
-                        pressureOpacityToggle,
+                        // pressureOpacityToggle,
                     ],
                     css: {
                         display: 'flex',

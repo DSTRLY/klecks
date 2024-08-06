@@ -9,10 +9,11 @@ import brushIconImg from '/src/app/img/ui/brush-blend.svg';
 import {IBrushUi} from '../kl-types';
 import {LANG, languageStrings} from '../../language/language';
 import {BlendBrush} from '../brushes/blend-brush';
+import { emojiToSvg } from '../utils/emojiToSvg';
 
 export const blendBrushUi = (function () {
     const brushInterface = {
-        image: brushIconImg,
+        image: emojiToSvg('🖌️'),
         tooltip: LANG('brush-blend'),
         sizeSlider: {
             min: 0.5,
@@ -31,6 +32,8 @@ export const blendBrushUi = (function () {
 
     brushInterface.Ui = function (p) {
         const div = document.createElement('div'); // the gui
+        div.style.height = '150px';
+
         const brush = new brushes.BlendBrush();
         brush.setHistory(klHistory);
         p.onSizeChange(brush.getSize());
@@ -117,7 +120,7 @@ export const blendBrushUi = (function () {
                 BB.el({
                     content: [
                         sizeSlider.getElement(),
-                        pressureSizeToggle,
+                        // pressureSizeToggle,
                     ],
                     css: {
                         display: 'flex',
@@ -129,7 +132,7 @@ export const blendBrushUi = (function () {
                 BB.el({
                     content: [
                         opacitySlider.getElement(),
-                        pressureOpacityToggle,
+                        // pressureOpacityToggle,
                     ],
                     css: {
                         display: 'flex',

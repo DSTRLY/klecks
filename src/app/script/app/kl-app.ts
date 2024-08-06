@@ -120,7 +120,7 @@ export class KlApp {
                         left: '0',
                     });
                 }
-                this.toolspace.style.display = 'block';
+                this.toolspace.style.display = 'flex';
                 this.klCanvasWorkspace.setSize(Math.max(0, this.uiWidth - this.toolWidth), this.uiHeight);
                 this.statusOverlay.setWide(false);
 
@@ -741,6 +741,9 @@ export class KlApp {
                 overflow: 'hidden',
                 userSelect: 'none',
                 touchAction: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-around',
             },
         });
         this.toolspaceInner = BB.el({

@@ -9,10 +9,11 @@ import brushIconImg from '/src/app/img/ui/brush-smudge.svg';
 import {IBrushUi} from '../kl-types';
 import {LANG, languageStrings} from '../../language/language';
 import {SmudgeBrush} from '../brushes/smudge-brush';
+import { emojiToSvg } from '../utils/emojiToSvg';
 
 export const smudgeBrushUi = (function () {
     const brushInterface = {
-        image: brushIconImg,
+        image: emojiToSvg('🫵'),
         tooltip: LANG('brush-smudge'),
         sizeSlider: {
             min: 0.5,
@@ -32,6 +33,8 @@ export const smudgeBrushUi = (function () {
 
     brushInterface.Ui = function (p) {
         const div = document.createElement('div'); // the gui
+        div.style.height = '150px';
+
         const brush = new brushes.SmudgeBrush();
         brush.setHistory(klHistory);
         p.onSizeChange(brush.getSize());
@@ -108,7 +111,7 @@ export const smudgeBrushUi = (function () {
                 BB.el({
                     content: [
                         sizeSlider.getElement(),
-                        pressureSizeToggle,
+                        // pressureSizeToggle,
                     ],
                     css: {
                         display: 'flex',
@@ -120,7 +123,7 @@ export const smudgeBrushUi = (function () {
                 BB.el({
                     content: [
                         opacitySlider.getElement(),
-                        pressureOpacityToggle,
+                        // pressureOpacityToggle,
                     ],
                     css: {
                         display: 'flex',
