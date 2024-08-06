@@ -213,7 +213,7 @@ export class KlApp {
         // default 2048, unless your screen is bigger than that (that computer then probably has the horsepower for that)
         // but not larger than 4096 - a fairly arbitrary decision
         const klMaxCanvasSize = Math.min(4096, Math.max(2048, Math.max(window.screen.width, window.screen.height)));
-        this.uiState = (this.embed ? 'left' : (LocalStorage.getItem('uiState') ? LocalStorage.getItem('uiState') : 'right')) as TUiLayout;
+        this.uiState = (this.embed ? 'left' : (LocalStorage.getItem('uiState') ? LocalStorage.getItem('uiState') : 'left')) as TUiLayout;
         const projectStore = pOptions.projectStore;
         this.klRootEl = BB.el({
             className: 'g-root',
