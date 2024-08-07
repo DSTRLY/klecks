@@ -155,6 +155,7 @@ export class TabRow {
                     content: pTabObj['toolName']?.toUpperCase() ?? '',
                     css: {
                         fontSize: '12px',
+                        fontWeight: 'bold',
                     }
                 });
             }
