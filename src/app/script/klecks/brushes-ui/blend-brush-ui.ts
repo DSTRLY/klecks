@@ -15,6 +15,7 @@ import { BRUSH_OPTIONS_HEIGHT } from '../constants';
 export const blendBrushUi = (function () {
     const brushInterface = {
         image: emojiToSvg('🖌️'),
+        toolName: 'Blend',
         tooltip: LANG('brush-blend'),
         sizeSlider: {
             min: 0.5,

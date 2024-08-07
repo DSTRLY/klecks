@@ -17,6 +17,7 @@ import { BRUSH_OPTIONS_HEIGHT } from '../constants';
 export const penBrushUi = (function () {
     const brushInterface = {
         image: emojiToSvg('🖊️'),
+        toolName: 'Pen',
         tooltip: LANG('brush-pen'),
         sizeSlider: {
             min: 0.5,

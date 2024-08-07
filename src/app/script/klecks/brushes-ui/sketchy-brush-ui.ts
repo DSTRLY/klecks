@@ -13,6 +13,7 @@ import { BRUSH_OPTIONS_HEIGHT } from '../constants';
 export const sketchyBrushUi = (function () {
     const brushInterface = {
         image: emojiToSvg('✏️'),
+        toolName: 'Sketch',
         tooltip: LANG('brush-sketchy'),
         sizeSlider: {
             min: 0.5,

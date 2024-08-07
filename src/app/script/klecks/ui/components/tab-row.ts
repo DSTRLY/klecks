@@ -12,7 +12,7 @@ type TTabInit = {
     label?: string;
     image?: string; // background image
     title?: string;
-    'tool-name'?: string;
+    'toolName'?: string;
     isVisible?: boolean; // default is true
     onOpen: () => void;
     onClose: () => void;
@@ -62,7 +62,10 @@ export class TabRow {
         this.rootEl = BB.el({
             className: 'tabrow',
             css: {
-                height: (height + 1) + 'px',
+                minHeight: (height + 1) + 'px',
+                // grid with equal sized child elements.
+                display: 'grid',
+                gridTemplateColumns: 'repeat(' + p.tabArr.length + ', 1fr)',
             },
         });
 
@@ -144,14 +147,14 @@ export class TabRow {
                 });
             }
 
-            if ('tool-name' in pTabObj) {
+            if ('toolName' in pTabObj) {
                 BB.el({
                     tagName: 'span',
                     parent: result.el,
                     className: 'tabrow__tab__tool-name',
-                    content: pTabObj['tool-name']?.toUpperCase() ?? '',
+                    content: pTabObj['toolName']?.toUpperCase() ?? '',
                     css: {
-                        fontSize: '8px',
+                        fontSize: '12px',
                     }
                 });
             }

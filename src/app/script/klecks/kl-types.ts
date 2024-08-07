@@ -207,6 +207,7 @@ export type TBrushUiInstance<GBrush> = {
 
 export interface IBrushUi<GBrush> extends ISliderConfig {
     image: string;
+    toolName?: string;
     tooltip: string;
     Ui: (
         this: TBrushUiInstance<GBrush>,

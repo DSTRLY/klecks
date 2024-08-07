@@ -15,6 +15,7 @@ import { BRUSH_OPTIONS_HEIGHT } from '../constants';
 export const smudgeBrushUi = (function () {
     const brushInterface = {
         image: emojiToSvg('🫵'),
+        toolName: 'Smudge',
         tooltip: LANG('brush-smudge'),
         sizeSlider: {
             min: 0.5,

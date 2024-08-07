@@ -1028,6 +1028,7 @@ export class KlApp {
                     return {
                         id: keyStr,
                         image: KL.brushesUI[keyStr].image,
+                        toolName: KL.brushesUI[keyStr].toolName,
                         title: KL.brushesUI[keyStr].tooltip,
                         onOpen: () => {
                             brushUiMap[keyStr].getElement().style.display = 'block';

@@ -14,6 +14,7 @@ import { BRUSH_OPTIONS_HEIGHT } from '../constants';
 export const eraserBrushUi = (function () {
     const brushInterface = {
         image: brushIconImg,
+        toolName: 'Eraser',
         tooltip: LANG('eraser') + ' [E]',
         sizeSlider: {
             min: 0.5,
