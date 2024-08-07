@@ -7,10 +7,12 @@ import {IBrushUi} from '../kl-types';
 import {LANG, languageStrings} from '../../language/language';
 import {BB} from '../../bb/bb';
 import {SketchyBrush} from '../brushes/sketchy-brush';
+import { emojiToSvg } from '../utils/emojiToSvg';
+import { BRUSH_OPTIONS_HEIGHT } from '../constants';
 
 export const sketchyBrushUi = (function () {
     const brushInterface = {
-        image: brushIconImg,
+        image: emojiToSvg('✏️'),
         tooltip: LANG('brush-sketchy'),
         sizeSlider: {
             min: 0.5,
@@ -28,6 +30,8 @@ export const sketchyBrushUi = (function () {
 
     brushInterface.Ui = function (p) {
         const div = document.createElement('div'); // the gui
+        div.style.height = BRUSH_OPTIONS_HEIGHT + 'px';
+
         const brush = new brushes.SketchyBrush();
         brush.setHistory(klHistory);
         p.onSizeChange(brush.getSize());

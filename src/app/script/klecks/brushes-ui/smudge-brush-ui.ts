@@ -10,6 +10,7 @@ import {IBrushUi} from '../kl-types';
 import {LANG, languageStrings} from '../../language/language';
 import {SmudgeBrush} from '../brushes/smudge-brush';
 import { emojiToSvg } from '../utils/emojiToSvg';
+import { BRUSH_OPTIONS_HEIGHT } from '../constants';
 
 export const smudgeBrushUi = (function () {
     const brushInterface = {
@@ -33,7 +34,7 @@ export const smudgeBrushUi = (function () {
 
     brushInterface.Ui = function (p) {
         const div = document.createElement('div'); // the gui
-        div.style.height = '150px';
+        div.style.height = BRUSH_OPTIONS_HEIGHT + 'px';
 
         const brush = new brushes.SmudgeBrush();
         brush.setHistory(klHistory);
@@ -84,7 +85,7 @@ export const smudgeBrushUi = (function () {
                 manualInputRoundDigits: 1,
             });
             opacitySlider = new KlSlider({
-                label: LANG('opacity'),
+                label: LANG('pressure'),
                 width: 225,
                 height: 30,
                 min: brushInterface.opacitySlider.min,
@@ -111,7 +112,7 @@ export const smudgeBrushUi = (function () {
                 BB.el({
                     content: [
                         sizeSlider.getElement(),
-                        // pressureSizeToggle,
+                        pressureSizeToggle,
                     ],
                     css: {
                         display: 'flex',
@@ -123,7 +124,7 @@ export const smudgeBrushUi = (function () {
                 BB.el({
                     content: [
                         opacitySlider.getElement(),
-                        // pressureOpacityToggle,
+                        pressureOpacityToggle,
                     ],
                     css: {
                         display: 'flex',

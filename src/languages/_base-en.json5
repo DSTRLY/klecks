@@ -946,6 +946,7 @@ renaming keys across language files:
     hint: "for layer opacity, brush opacity, text opacity, ...",
     value: "Opacity",
   },
+  pressure: "Pressure",
   red: "Red",
   green: "Green",
   blue: "Blue",

@@ -10,6 +10,7 @@ import {IBrushUi} from '../kl-types';
 import {LANG, languageStrings} from '../../language/language';
 import {BlendBrush} from '../brushes/blend-brush';
 import { emojiToSvg } from '../utils/emojiToSvg';
+import { BRUSH_OPTIONS_HEIGHT } from '../constants';
 
 export const blendBrushUi = (function () {
     const brushInterface = {
@@ -32,7 +33,7 @@ export const blendBrushUi = (function () {
 
     brushInterface.Ui = function (p) {
         const div = document.createElement('div'); // the gui
-        div.style.height = '150px';
+        div.style.height = BRUSH_OPTIONS_HEIGHT + 'px';
 
         const brush = new brushes.BlendBrush();
         brush.setHistory(klHistory);
@@ -120,7 +121,7 @@ export const blendBrushUi = (function () {
                 BB.el({
                     content: [
                         sizeSlider.getElement(),
-                        // pressureSizeToggle,
+                        pressureSizeToggle,
                     ],
                     css: {
                         display: 'flex',
@@ -132,7 +133,7 @@ export const blendBrushUi = (function () {
                 BB.el({
                     content: [
                         opacitySlider.getElement(),
-                        // pressureOpacityToggle,
+                        pressureOpacityToggle,
                     ],
                     css: {
                         display: 'flex',

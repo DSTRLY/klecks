@@ -9,6 +9,7 @@ import brushIconImg from '/src/app/img/ui/brush-eraser-2.svg';
 import {IBrushUi} from '../kl-types';
 import {LANG, languageStrings} from '../../language/language';
 import {EraserBrush} from '../brushes/eraser-brush';
+import { BRUSH_OPTIONS_HEIGHT } from '../constants';
 
 export const eraserBrushUi = (function () {
     const brushInterface = {
@@ -31,7 +32,7 @@ export const eraserBrushUi = (function () {
 
     brushInterface.Ui = function (p) {
         const div = document.createElement('div'); // the gui
-        div.style.height = '150px';
+        div.style.height = BRUSH_OPTIONS_HEIGHT + 'px';
 
         const brush = new brushes.EraserBrush();
         brush.setHistory(klHistory);
@@ -97,7 +98,7 @@ export const eraserBrushUi = (function () {
                 BB.el({
                     content: [
                         sizeSlider.getElement(),
-                        // pressureSizeToggle,
+                        pressureSizeToggle,
                     ],
                     css: {
                         display: 'flex',
@@ -109,7 +110,7 @@ export const eraserBrushUi = (function () {
                 BB.el({
                     content: [
                         opacitySlider.getElement(),
-                        // pressureOpacityToggle,
+                        pressureOpacityToggle,
                     ],
                     css: {
                         display: 'flex',

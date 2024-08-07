@@ -12,6 +12,7 @@ type TTabInit = {
     label?: string;
     image?: string; // background image
     title?: string;
+    'tool-name'?: string;
     isVisible?: boolean; // default is true
     onOpen: () => void;
     onClose: () => void;
@@ -124,8 +125,8 @@ export class TabRow {
                 }),
                 pointerListener: {} as PointerListener,
             };
+            
             if ('image' in pTabObj) {
-
                 BB.el({
                     tagName: 'span',
                     parent: result.el,
@@ -142,6 +143,20 @@ export class TabRow {
                     },
                 });
             }
+
+            if ('tool-name' in pTabObj) {
+                BB.el({
+                    tagName: 'span',
+                    parent: result.el,
+                    className: 'tabrow__tab__tool-name',
+                    content: pTabObj['tool-name']?.toUpperCase() ?? '',
+                    css: {
+                        fontSize: '8px',
+                    }
+                });
+            }
+
+
             if ('css' in pTabObj && pTabObj.css !== undefined) {
                 BB.css(result.el, pTabObj.css);
             }
