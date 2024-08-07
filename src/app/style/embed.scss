@@ -11,12 +11,13 @@ body {
 }
 
 .toolspace-row-button__submit {
-  background: var(--kl-color);
+  background: #fd6e48;
   color: #fff;
 }
 
 .toolspace-row-button-hover > .toolspace-row-button__submit {
-  background: var(--kl-color-hover);
+  color: black;
+  background: #ff7f5c;
 }
 
 @keyframes spin {

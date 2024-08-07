@@ -102,8 +102,8 @@ a:hover, a:not([href]):hover {
 }
 
 .kl-toolspace-row {
-    background: linear-gradient(to top, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.6) 100%);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px #cecece;
+    // background: linear-gradient(to top, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.6) 100%);
+    // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px #cecece;
 }
 
 .nohighlight {
@@ -130,7 +130,7 @@ a:hover, a:not([href]):hover {
 }
 
 .toolspace-row-button-hover {
-    background: rgba(255, 255, 255, 0.7);
+    // background: rgba(255, 255, 255, 0.7);
 }
 
 .toolspace-row-button:active, .toolspace-triangle-button:active {

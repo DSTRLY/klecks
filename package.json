@@ -9,7 +9,7 @@
     "ios_saf 9"
   ],
   "scripts": {
-    "copy-local": "rm -rf ../signer/public/klecks/* && cp -r dist/* ../signer/public/klecks/",
+    "bc": "npm run lang:build && npm run build:embed && rm -rf ../signer/public/klecks/* && cp -r dist/* ../signer/public/klecks/",
     "start": "parcel serve src/index.html --no-cache",
     "build": "parcel build src/index.html",
     "build:embed": "parcel build src/embed.ts",

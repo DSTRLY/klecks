@@ -16,12 +16,13 @@ export class EmbedToolspaceTopRow {
 
     // ---- public ----
 
-    constructor(p: { onSubmit: () => void; onLeftRight: () => void; onHelp: () => void, onCloseApp: () => void }) {
+    constructor(p: { onSubmit?: () => void; onLeftRight?: () => void; onHelp?: () => void, onCloseApp?: () => void }) {
         this.rootEl = BB.el({
             className: 'kl-toolspace-row',
             css: {
                 height: '36px',
                 display: 'flex',
+                padding: '0 16px',
             },
         });
 
@@ -75,23 +76,27 @@ export class EmbedToolspaceTopRow {
             };
         }
 
-        const submitButton = createButton({
-            onClick: p.onSubmit,
-            title: LANG('submit-title'),
-            content: BB.el({
-                content: LANG('submit'),
-                className: 'toolspace-row-button__submit',
-                css: {
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100%',
-                    height: '100%',
-                },
-            }),
-            contain: true,
-        });
-        submitButton.el.style.width = '45px';
+        if (typeof p.onSubmit === 'function') {
+            const submitButton = createButton({
+                onClick: p.onSubmit,
+                title: LANG('submit-title'),
+                content: BB.el({
+                    content: LANG('submit'),
+                    className: 'toolspace-row-button__submit',
+                    css: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '100%',
+                        height: '100%',
+                        borderRadius: '16px',
+                    },
+                }),
+                contain: true,
+            });
+
+            this.rootEl.append(submitButton.el);
+        }
 
         // const helpButton = createButton({
         //     onClick: p.onHelp,
@@ -107,24 +112,27 @@ export class EmbedToolspaceTopRow {
         //     contain: true,
         // });
 
-        const closeButton = createButton({
-            onClick: p.onCloseApp,
-            title: LANG('exit-title'),
-            content: BB.el({
-                content: LANG('exit-content'),
-                className: 'toolspace-row-button__submit',
-                css: {
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100%',
-                    height: '100%',
-                },
-            }),
-            contain: true,
-        });
+        if (typeof p.onCloseApp === 'function') {
+            const closeButton = createButton({
+                onClick: p.onCloseApp,
+                title: LANG('exit-without-saving'),
+                content: BB.el({
+                    content: LANG('exit-without-saving'),
+                    className: 'toolspace-row-button__submit',
+                    css: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '100%',
+                        height: '100%',
+                        borderRadius: '16px',
+                    },
+                }),
+                contain: true,
+            });
 
-        this.rootEl.append(submitButton.el, closeButton.el);
+            this.rootEl.append(closeButton.el);
+        }
     }
 
     getElement(): HTMLElement {

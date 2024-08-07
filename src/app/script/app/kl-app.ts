@@ -741,14 +741,18 @@ export class KlApp {
                 overflow: 'hidden',
                 userSelect: 'none',
                 touchAction: 'none',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-around',
             },
         });
         this.toolspaceInner = BB.el({
             parent: this.toolspace,
         });
+
+        this.toolspaceInner.style.display = 'flex';
+        this.toolspaceInner.style.flexDirection = 'column';
+        this.toolspaceInner.style.height = '100%';
+        this.toolspaceInner.style.justifyContent = 'space-between';
+        this.toolspaceInner.style.padding = '16px 0';
+
         this.toolspace.oncontextmenu = () => {
             return false;
         };
@@ -790,22 +794,22 @@ export class KlApp {
         let toolspaceTopRow;
         if (this.embed) {
             toolspaceTopRow = new EmbedToolspaceTopRow({
-                onCloseApp: () => {
-                    KL.popup({
-                        target: this.klRootEl,
-                        message: LANG('close-app-prompt'),
-                        buttons: [LANG('close-app'), 'Cancel'],
-                        callback: (result) => {
-                            if (result === LANG('close-app') && typeof this.embed!.onCloseApp === 'function') {
-                                this.embed!.onCloseApp();
-                            }
-                        }
-                    })
+                // onCloseApp: () => {
+                //     KL.popup({
+                //         target: this.klRootEl,
+                //         message: LANG('close-app-prompt'),
+                //         buttons: [LANG('close-app'), 'Cancel'],
+                //         callback: (result) => {
+                //             if (result === LANG('close-app') && typeof this.embed!.onCloseApp === 'function') {
+                //                 this.embed!.onCloseApp();
+                //             }
+                //         }
+                //     })
                     
-                },
-                onHelp: () => {
-                    showIframeModal(this.embed!.url + '/help.html', !!this.embed);
-                },
+                // },
+                // onHelp: () => {
+                //     showIframeModal(this.embed!.url + '/help.html', !!this.embed);
+                // },
                 onSubmit: () => {
                     const onFailure = () => {
                         let closeFunc: () => void;
@@ -868,10 +872,10 @@ export class KlApp {
                         },
                     });
                 },
-                onLeftRight: () => {
-                    this.uiState = this.uiState === 'left' ? 'right' : 'left';
-                    this.updateUi();
-                },
+                // onLeftRight: () => {
+                //     this.uiState = this.uiState === 'left' ? 'right' : 'left';
+                //     this.updateUi();
+                // },
             });
 
             toolspaceTopRow.getElement().style.marginBottom = '10px';
@@ -1528,29 +1532,47 @@ export class KlApp {
             );
         }
 
-
-
-
         BB.append(this.toolspaceInner, [
             // this.layerPreview.getElement(),
             // mainTabRow.getElement(),
             brushDiv,
-            handUi.getElement(),
-            fillUi.getElement(),
-            gradientUi.getElement(),
-            textUi.getElement(),
-            shapeUi.getElement(),
-            this.layerManager.getElement(),
-            filterTab.getElement(),
-            fileTab ? fileTab.getElement() : undefined,
-            settingsTab.getElement(),
-            BB.el({
-                css: {
-                    height: '10px', // a bit of spacing at the bottom
-                },
-            }),
-            this.bottomBarWrapper ? this.bottomBarWrapper : undefined,
+            // handUi.getElement(),
+            // fillUi.getElement(),
+            // gradientUi.getElement(),
+            // textUi.getElement(),
+            // shapeUi.getElement(),
+            // this.layerManager.getElement(),
+            // filterTab.getElement(),
+            // fileTab ? fileTab.getElement() : undefined,
+            // settingsTab.getElement(),
+            // BB.el({
+            //     css: {
+            //         height: '10px', // a bit of spacing at the bottom
+            //     },
+            // }),
+            // this.bottomBarWrapper ? this.bottomBarWrapper : undefined,
         ]);
+
+        if (this.embed) {
+            const toolSpaceBottomRow = new EmbedToolspaceTopRow({
+                onCloseApp: () => {
+                    KL.popup({
+                        target: this.klRootEl,
+                        message: LANG('close-app-prompt'),
+                        buttons: [LANG('close-app'), 'Cancel'],
+                        callback: (result) => {
+                            if (result === LANG('close-app') && typeof this.embed!.onCloseApp === 'function') {
+                                this.embed!.onCloseApp();
+                            }
+                        }
+                    })
+                    
+                },
+            });
+
+            toolSpaceBottomRow.getElement().style.marginTop = '10px';
+            this.toolspaceInner.append(toolSpaceBottomRow.getElement());
+        }
 
         this.toolspaceScroller = new KL.ToolspaceScroller({
             toolspace: this.toolspace,

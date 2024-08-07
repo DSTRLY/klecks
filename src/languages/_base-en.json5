@@ -15,8 +15,7 @@ renaming keys across language files:
     hint: "Button that switches layout from left to right, to accommodate left handed & right handed visitors.",
     value: "Switch left/right UI",
   },
-  "exit-title": "Exit without saving",
-  "exit-content": "Exit",
+  "exit-without-saving": "Exit without saving",
   "close-app-prompt": "Exit without saving?",
   "close-app": "Exit",
   "toggle-show-tools": {
@@ -878,14 +877,14 @@ renaming keys across language files:
     value: "You can backup your drawing.",
   },
 
-  submit: "Save Signature",
+  submit: "Save",
   "submit-title": {
     hint: 'tooltip when hovering "Save" button',
-    value: "Save Signature",
+    value: "Save",
   },
   "submit-prompt": {
     hint: "Dialog asking for confirmation",
-    value: "Save Signature?",
+    value: "Save and exit?",
   },
   "submit-submitting": {
     hint: "in the process of uploading",
