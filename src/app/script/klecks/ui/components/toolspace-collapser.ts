@@ -12,13 +12,16 @@ export class ToolspaceCollapser {
     private directionStr: TUiLayout;
     private readonly icon: HTMLElement;
     private stateIsOpen: boolean;
+    private readonly txt: HTMLElement;
 
 
     private update(): void {
         if (this.directionStr === 'left') {
             this.icon.style.transform = this.stateIsOpen ? 'rotate(180deg)' : '';
+            this.txt.textContent = this.stateIsOpen ? 'HIDE' : 'SHOW';
         } else {
             this.icon.style.transform = this.stateIsOpen ? '' : 'rotate(180deg)';
+            this.txt.textContent = this.stateIsOpen ? 'HIDE' : 'SHOW';
         }
     }
 
@@ -34,9 +37,8 @@ export class ToolspaceCollapser {
         this.rootEl = BB.el({
             className: 'kl-toolspace-toggle',
             css: {
-                width: '36px',
-                height: '36px',
-                background: 'rgba(100, 100, 100, 0.9)',
+                background: 'rgba(255, 255, 255)',
+                border: '1px solid black',
                 color: '#fff',
                 position: 'absolute',
                 top: '0',
@@ -46,6 +48,7 @@ export class ToolspaceCollapser {
                 userSelect: 'none',
                 padding: '6px',
                 boxSizing: 'border-box',
+                fontSize: '24px',
             },
             title: LANG('toggle-show-tools'),
             onClick: (e) => {
@@ -58,16 +61,22 @@ export class ToolspaceCollapser {
 
         this.icon = BB.el({
             parent: this.rootEl,
+            content: '➡️',
             css: {
-                backgroundImage: `url(${collapseImg})`,
-                width: '100%',
-                height: '100%',
-                backgroundSize: 'contain',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
+                lineHeight: '24px',
                 userSelect: 'none',
             },
         });
+
+        this.txt = BB.el({
+            content: this.stateIsOpen ? 'HIDE' : 'SHOW',
+            css: {
+                color: 'black',
+            }
+        });
+
+        this.rootEl.appendChild(this.txt);
+
         this.rootEl.oncontextmenu = () => {
             return false;
         };

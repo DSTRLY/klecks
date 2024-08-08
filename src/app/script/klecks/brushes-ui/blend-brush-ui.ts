@@ -1,11 +1,11 @@
 import {BB} from '../../bb/bb';
 import {createPenPressureToggle} from '../ui/components/create-pen-pressure-toggle';
 import {eventResMs} from './brushes-consts';
-import {Checkbox} from '../ui/components/checkbox';
+// import {Checkbox} from '../ui/components/checkbox';
 import {brushes} from '../brushes/brushes';
 import {klHistory} from '../history/kl-history';
 import {KlSlider} from '../ui/components/kl-slider';
-import brushIconImg from '/src/app/img/ui/brush-blend.svg';
+// import brushIconImg from '/src/app/img/ui/brush-blend.svg';
 import {IBrushUi} from '../kl-types';
 import {LANG, languageStrings} from '../../language/language';
 import {BlendBrush} from '../brushes/blend-brush';
