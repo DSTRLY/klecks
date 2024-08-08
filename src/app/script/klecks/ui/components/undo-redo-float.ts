@@ -61,6 +61,7 @@ export class UndoRedoFloat {
                     fontSize: '24px',
                     lineHeight: '24px',
                     backgroundColor: 'white',
+                    userSelect: 'none',
                 },
             });
 

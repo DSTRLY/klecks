@@ -147,7 +147,6 @@ export class KlApp {
                 this.toolspace.style.display = 'none';
                 this.klCanvasWorkspace.setSize(Math.max(0, this.uiWidth), this.uiHeight);
                 this.statusOverlay.setWide(true);
-
             }
 
         // } else {
@@ -960,7 +959,7 @@ export class KlApp {
             this.undoRedoFloat.setEnableUndo(klHistory.canUndo());
             this.undoRedoFloat.setEnableRedo(klHistory.canRedo());
         });
-        this.toolspaceInner.append(this.undoRedoFloat.getElement());
+        this.klRootEl.append(this.undoRedoFloat.getElement());
 
         const setBrushColor = (p_color: IRGB) => {
             currentColor = p_color;
@@ -1728,7 +1727,7 @@ export class KlApp {
 
         this.layerPreview.setIsVisible(this.uiHeight >= 579);
         this.klColorSlider.setHeight(Math.max(163, Math.min(400, this.uiHeight - 505)));
-        this.toolspaceToolRow.setIsSmall(this.uiHeight < 540);
+        // this.toolspaceToolRow.setIsSmall(this.uiHeight < 540);
     }
 
     out(msg: string): void {
