@@ -26,7 +26,8 @@ import { LineSanitizer } from '../klecks/events/line-sanitizer';
 import { TabRow } from '../klecks/ui/components/tab-row';
 import { LayerPreview } from '../klecks/ui/components/layer-preview';
 import { KlColorSlider } from '../klecks/ui/components/kl-color-slider';
-import { ToolspaceToolRow } from '../klecks/ui/components/toolspace-tool-row';
+// import { ToolspaceToolRow } from '../klecks/ui/components/toolspace-tool-row';
+import { UndoRedoFloat } from '../klecks/ui/components/undo-redo-float';
 import { StatusOverlay } from '../klecks/ui/components/status-overlay';
 import { SaveToComputer } from '../klecks/storage/save-to-computer';
 import { ToolspaceCollapser } from '../klecks/ui/components/toolspace-collapser';
@@ -77,7 +78,8 @@ export class KlApp {
     private uiHeight: number;
     private readonly layerPreview: LayerPreview;
     private readonly klColorSlider: KlColorSlider;
-    private readonly toolspaceToolRow: ToolspaceToolRow;
+    // private readonly toolspaceToolRow: ToolspaceToolRow;
+    private readonly undoRedoFloat: UndoRedoFloat;
     private readonly statusOverlay: StatusOverlay;
     private readonly klCanvas: KlCanvas;
     private uiState: TUiLayout;
@@ -378,7 +380,7 @@ export class KlApp {
                 brushSettingService.setColor(rgbObj);
                 if (isDragDone) {
                     this.klColorSlider.pickingDone();
-                    this.klCanvasWorkspace.setMode(this.toolspaceToolRow.getActive());
+                    // this.klCanvasWorkspace.setMode(this.toolspaceToolRow.getActive());
                 }
             },
             onFill: (canvasX, canvasY) => {
@@ -473,8 +475,8 @@ export class KlApp {
                     });
                 }
 
-                this.toolspaceToolRow.setEnableZoomIn(viewChangeObj.scale !== this.klCanvasWorkspace.getMaxScale());
-                this.toolspaceToolRow.setEnableZoomOut(viewChangeObj.scale !== this.klCanvasWorkspace.getMinScale());
+                // this.toolspaceToolRow.setEnableZoomIn(viewChangeObj.scale !== this.klCanvasWorkspace.getMaxScale());
+                // this.toolspaceToolRow.setEnableZoomOut(viewChangeObj.scale !== this.klCanvasWorkspace.getMinScale());
 
                 handUi.update(viewChangeObj.scale, viewChangeObj.angle * 180 / Math.PI);
             },
@@ -499,29 +501,29 @@ export class KlApp {
                 return;
             }
 
-            const toolObj = {
-                'draw': {},
-                'hand': {},
-                'fill': {},
-                'gradient': {},
-                'text': {},
-                'shape': {},
-            };
+            // const toolObj = {
+            //     'draw': {},
+            //     'hand': {},
+            //     'fill': {},
+            //     'gradient': {},
+            //     'text': {},
+            //     'shape': {},
+            // };
 
-            const activeStr = this.toolspaceToolRow.getActive();
-            const oldTabId = mainTabRow.getOpenedTabId();
+            // const activeStr = this.toolspaceToolRow.getActive();
+            // const oldTabId = mainTabRow.getOpenedTabId();
 
-            const keysArr = Object.keys(toolObj);
-            for (let i = 0; i < keysArr.length; i++) {
-                if (activeStr === keysArr[i]) {
-                    mainTabRow.setIsVisible(keysArr[i], true);
-                } else {
-                    mainTabRow.setIsVisible(keysArr[i], false);
-                    if (oldTabId === keysArr[i]) {
-                        mainTabRow.open(activeStr);
-                    }
-                }
-            }
+            // const keysArr = Object.keys(toolObj);
+            // for (let i = 0; i < keysArr.length; i++) {
+            //     if (activeStr === keysArr[i]) {
+            //         mainTabRow.setIsVisible(keysArr[i], true);
+            //     } else {
+            //         mainTabRow.setIsVisible(keysArr[i], false);
+            //         if (oldTabId === keysArr[i]) {
+            //             mainTabRow.open(activeStr);
+            //         }
+            //     }
+            // }
 
         };
 
@@ -660,7 +662,7 @@ export class KlApp {
                 } else if (comboStr === 'e') {
                     event.preventDefault();
                     this.klCanvasWorkspace.setMode('draw');
-                    this.toolspaceToolRow.setActive('draw');
+                    // this.toolspaceToolRow.setActive('draw');
                     mainTabRow && mainTabRow.open('draw');
                     updateMainTabVisibility();
                     brushTabRow.open('eraserBrush');
@@ -669,7 +671,7 @@ export class KlApp {
                     event.preventDefault();
                     const prevMode = this.klCanvasWorkspace.getMode();
                     this.klCanvasWorkspace.setMode('draw');
-                    this.toolspaceToolRow.setActive('draw');
+                    // this.toolspaceToolRow.setActive('draw');
                     mainTabRow && mainTabRow.open('draw');
                     updateMainTabVisibility();
                     brushTabRow.open(prevMode === 'draw' ? getNextBrushId() : currentBrushId);
@@ -678,21 +680,21 @@ export class KlApp {
                     event.preventDefault();
                     const newMode = this.klCanvasWorkspace.getMode() === 'fill' ? 'gradient' : 'fill';
                     this.klCanvasWorkspace.setMode(newMode);
-                    this.toolspaceToolRow.setActive(newMode);
+                    // this.toolspaceToolRow.setActive(newMode);
                     mainTabRow && mainTabRow.open(newMode);
                     updateMainTabVisibility();
                 }
                 if (comboStr === 't') {
                     event.preventDefault();
                     this.klCanvasWorkspace.setMode('text');
-                    this.toolspaceToolRow.setActive('text');
+                    // this.toolspaceToolRow.setActive('text');
                     mainTabRow && mainTabRow.open('text');
                     updateMainTabVisibility();
                 }
                 if (comboStr === 'u') {
                     event.preventDefault();
                     this.klCanvasWorkspace.setMode('shape');
-                    this.toolspaceToolRow.setActive('shape');
+                    // this.toolspaceToolRow.setActive('shape');
                     mainTabRow && mainTabRow.open('shape');
                     updateMainTabVisibility();
                 }
@@ -905,33 +907,48 @@ export class KlApp {
         }
 
 
-        this.toolspaceToolRow = new KL.ToolspaceToolRow({
-            onActivate: (activeStr) => {
-                if (activeStr === 'draw') {
-                    this.klCanvasWorkspace.setMode('draw');
-                } else if (activeStr === 'hand') {
-                    this.klCanvasWorkspace.setMode('hand');
-                } else if (activeStr === 'fill') {
-                    this.klCanvasWorkspace.setMode('fill');
-                } else if (activeStr === 'gradient') {
-                    this.klCanvasWorkspace.setMode('gradient');
-                } else if (activeStr === 'text') {
-                    this.klCanvasWorkspace.setMode('text');
-                } else if (activeStr === 'shape') {
-                    this.klCanvasWorkspace.setMode('shape');
-                } else {
-                    throw new Error('unknown activeStr');
-                }
-                mainTabRow && mainTabRow.open(activeStr);
-                updateMainTabVisibility();
-                this.klColorSlider.pickingDone();
-            },
-            onZoomIn: () => {
-                this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? 1 / 8 : 1 / 2);
-            },
-            onZoomOut: () => {
-                this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? -1 / 8 : -1 / 2);
-            },
+        // this.toolspaceToolRow = new KL.ToolspaceToolRow({
+        //     onActivate: (activeStr) => {
+        //         if (activeStr === 'draw') {
+        //             this.klCanvasWorkspace.setMode('draw');
+        //         } else if (activeStr === 'hand') {
+        //             this.klCanvasWorkspace.setMode('hand');
+        //         } else if (activeStr === 'fill') {
+        //             this.klCanvasWorkspace.setMode('fill');
+        //         } else if (activeStr === 'gradient') {
+        //             this.klCanvasWorkspace.setMode('gradient');
+        //         } else if (activeStr === 'text') {
+        //             this.klCanvasWorkspace.setMode('text');
+        //         } else if (activeStr === 'shape') {
+        //             this.klCanvasWorkspace.setMode('shape');
+        //         } else {
+        //             throw new Error('unknown activeStr');
+        //         }
+        //         mainTabRow && mainTabRow.open(activeStr);
+        //         updateMainTabVisibility();
+        //         this.klColorSlider.pickingDone();
+        //     },
+        //     onZoomIn: () => {
+        //         this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? 1 / 8 : 1 / 2);
+        //     },
+        //     onZoomOut: () => {
+        //         this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? -1 / 8 : -1 / 2);
+        //     },
+        //     onUndo: () => {
+        //         undoRedoCatchup.undo();
+        //     },
+        //     onRedo: () => {
+        //         undoRedoCatchup.redo();
+        //     },
+        // });
+        // this.toolspaceToolRow.setIsSmall(this.uiHeight < 540);
+        // klHistory.addListener(() => {
+        //     this.toolspaceToolRow.setEnableUndo(klHistory.canUndo());
+        //     this.toolspaceToolRow.setEnableRedo(klHistory.canRedo());
+        // });
+        // this.toolspaceInner.append(this.toolspaceToolRow.getElement());
+
+        this.undoRedoFloat = new KL.UndoRedoFloat({
             onUndo: () => {
                 undoRedoCatchup.undo();
             },
@@ -939,12 +956,11 @@ export class KlApp {
                 undoRedoCatchup.redo();
             },
         });
-        this.toolspaceToolRow.setIsSmall(this.uiHeight < 540);
         klHistory.addListener(() => {
-            this.toolspaceToolRow.setEnableUndo(klHistory.canUndo());
-            this.toolspaceToolRow.setEnableRedo(klHistory.canRedo());
+            this.undoRedoFloat.setEnableUndo(klHistory.canUndo());
+            this.undoRedoFloat.setEnableRedo(klHistory.canRedo());
         });
-        // this.toolspaceInner.append(this.toolspaceToolRow.getElement());
+        this.toolspaceInner.append(this.undoRedoFloat.getElement());
 
         const setBrushColor = (p_color: IRGB) => {
             currentColor = p_color;
@@ -966,7 +982,7 @@ export class KlApp {
             if (doPick) {
                 this.klCanvasWorkspace.setMode('pick');
             } else {
-                this.klCanvasWorkspace.setMode(this.toolspaceToolRow.getActive());
+                // this.klCanvasWorkspace.setMode(this.toolspaceToolRow.getActive());
                 updateMainTabVisibility();
             }
 
@@ -990,7 +1006,7 @@ export class KlApp {
             currentBrushUi.setColor(currentColor);
             currentBrushUi.setContext(currentLayerCtx);
             this.klCanvasWorkspace.setMode('draw');
-            this.toolspaceToolRow.setActive('draw');
+            // this.toolspaceToolRow.setActive('draw');
             updateMainTabVisibility();
         };
 

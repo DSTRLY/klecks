@@ -33,6 +33,7 @@ import {OverlayToolspace} from './ui/components/overlay-toolspace';
 import {ToolspaceTopRow} from './ui/components/toolspace-top-row';
 import {ToolDropdown} from './ui/components/tool-dropdown';
 import {ToolspaceToolRow} from './ui/components/toolspace-tool-row';
+import { UndoRedoFloat } from './ui/components/undo-redo-float';
 import {ToolspaceStabilizerRow} from './ui/components/toolspace-stabilizer-row';
 import {TabRow} from './ui/components/tab-row';
 import {HandUi} from './ui/tool-tabs/hand-ui';
@@ -142,6 +143,7 @@ export const KL = {
     ToolspaceTopRow,
     ToolDropdown,
     ToolspaceToolRow,
+    UndoRedoFloat,
     ToolspaceStabilizerRow,
     TabRow,
     ToolspaceCollapser,
