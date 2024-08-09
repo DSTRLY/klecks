@@ -3,8 +3,8 @@ import collapseImg from '/src/app/img/ui/ui-collapse.svg';
 import { LANG } from '../../../language/language';
 import { TUiLayout } from '../../kl-types';
 
-const COLLAPSE_TOOLS_TXT = 'COLLAPSE TOOLS';
-const EXPAND_TOOLS_TXT = 'EXPAND TOOLS';
+const HIDE_TOOLS_TXT = 'HIDE TOOLS';
+const SHOW_TOOLS_TXT = 'SHOW TOOLS';
 
 /**
  * button that allows to collapse toolspace (for mobile)
@@ -21,10 +21,10 @@ export class ToolspaceCollapser {
     private update(): void {
         if (this.directionStr === 'left') {
             this.icon.style.transform = this.stateIsOpen ? 'rotate(180deg)' : '';
-            this.txt.textContent = this.stateIsOpen ? COLLAPSE_TOOLS_TXT : EXPAND_TOOLS_TXT;
+            this.txt.textContent = this.stateIsOpen ? HIDE_TOOLS_TXT : SHOW_TOOLS_TXT;
         } else {
             this.icon.style.transform = this.stateIsOpen ? '' : 'rotate(180deg)';
-            this.txt.textContent = this.stateIsOpen ? COLLAPSE_TOOLS_TXT : EXPAND_TOOLS_TXT;
+            this.txt.textContent = this.stateIsOpen ? HIDE_TOOLS_TXT : SHOW_TOOLS_TXT;
         }
     }
 
@@ -49,9 +49,9 @@ export class ToolspaceCollapser {
                 lineHeight: '36px',
                 cursor: 'pointer',
                 userSelect: 'none',
-                padding: '6px',
+                paddingBottom: '8px',
                 boxSizing: 'border-box',
-                
+                fontSize: '24px',
             },
             title: LANG('toggle-show-tools'),
             onClick: (e) => {
@@ -66,19 +66,14 @@ export class ToolspaceCollapser {
             parent: this.rootEl,
             content: '➡️',
             css: {
-                lineHeight: '24px',
                 userSelect: 'none',
-                fontSize: '24px',
             },
         });
 
         this.txt = BB.el({
-            content: this.stateIsOpen ? COLLAPSE_TOOLS_TXT : EXPAND_TOOLS_TXT,
+            content: this.stateIsOpen ? HIDE_TOOLS_TXT : SHOW_TOOLS_TXT,
             css: {
                 writingMode: 'vertical-rl',
-                textOrientation: 'upright',
-                fontSize: '12px',
-                marginTop: '8px',
             }
         });
 
