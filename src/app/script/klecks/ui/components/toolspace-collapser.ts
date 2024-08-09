@@ -37,7 +37,7 @@ export class ToolspaceCollapser {
         this.rootEl = BB.el({
             className: 'kl-toolspace-toggle',
             css: {
-                background: 'rgba(255, 255, 255)',
+                background: '#F2F4F8',
                 border: '1px solid black',
                 color: '#fff',
                 position: 'absolute',
@@ -72,6 +72,7 @@ export class ToolspaceCollapser {
             content: this.stateIsOpen ? 'HIDE' : 'SHOW',
             css: {
                 color: 'black',
+                backgroundColor: '#F2F4F8',
             }
         });
 

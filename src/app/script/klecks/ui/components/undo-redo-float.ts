@@ -60,7 +60,7 @@ export class UndoRedoFloat {
                     borderRadius: '16px',
                     fontSize: '24px',
                     lineHeight: '24px',
-                    backgroundColor: 'white',
+                    backgroundColor: '#F2F4F8',
                     userSelect: 'none',
                 },
             });
