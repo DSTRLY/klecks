@@ -3,6 +3,9 @@ import collapseImg from '/src/app/img/ui/ui-collapse.svg';
 import { LANG } from '../../../language/language';
 import { TUiLayout } from '../../kl-types';
 
+const COLLAPSE_TOOLS_TXT = 'COLLAPSE TOOLS';
+const EXPAND_TOOLS_TXT = 'EXPAND TOOLS';
+
 /**
  * button that allows to collapse toolspace (for mobile)
  */
@@ -18,10 +21,10 @@ export class ToolspaceCollapser {
     private update(): void {
         if (this.directionStr === 'left') {
             this.icon.style.transform = this.stateIsOpen ? 'rotate(180deg)' : '';
-            this.txt.textContent = this.stateIsOpen ? 'HIDE' : 'SHOW';
+            this.txt.textContent = this.stateIsOpen ? COLLAPSE_TOOLS_TXT : EXPAND_TOOLS_TXT;
         } else {
             this.icon.style.transform = this.stateIsOpen ? '' : 'rotate(180deg)';
-            this.txt.textContent = this.stateIsOpen ? 'HIDE' : 'SHOW';
+            this.txt.textContent = this.stateIsOpen ? COLLAPSE_TOOLS_TXT : EXPAND_TOOLS_TXT;
         }
     }
 
@@ -37,7 +40,7 @@ export class ToolspaceCollapser {
         this.rootEl = BB.el({
             className: 'kl-toolspace-toggle',
             css: {
-                background: '#F2F4F8',
+                background: '#000',
                 border: '1px solid black',
                 color: '#fff',
                 position: 'absolute',
@@ -48,7 +51,7 @@ export class ToolspaceCollapser {
                 userSelect: 'none',
                 padding: '6px',
                 boxSizing: 'border-box',
-                fontSize: '24px',
+                
             },
             title: LANG('toggle-show-tools'),
             onClick: (e) => {
@@ -65,14 +68,17 @@ export class ToolspaceCollapser {
             css: {
                 lineHeight: '24px',
                 userSelect: 'none',
+                fontSize: '24px',
             },
         });
 
         this.txt = BB.el({
-            content: this.stateIsOpen ? 'HIDE' : 'SHOW',
+            content: this.stateIsOpen ? COLLAPSE_TOOLS_TXT : EXPAND_TOOLS_TXT,
             css: {
-                color: 'black',
-                backgroundColor: '#F2F4F8',
+                writingMode: 'vertical-rl',
+                textOrientation: 'upright',
+                fontSize: '12px',
+                marginTop: '8px',
             }
         });
 

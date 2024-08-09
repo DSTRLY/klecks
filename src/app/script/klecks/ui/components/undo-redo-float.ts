@@ -57,10 +57,10 @@ export class UndoRedoFloat {
                     display: 'flex',
                     padding: '8px',
                     gap: '4px',
-                    borderRadius: '16px',
                     fontSize: '24px',
                     lineHeight: '24px',
-                    backgroundColor: '#F2F4F8',
+                    backgroundColor: '#000',
+                    color: '#fff',
                     userSelect: 'none',
                 },
             });
