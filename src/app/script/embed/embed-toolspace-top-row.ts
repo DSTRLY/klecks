@@ -84,6 +84,7 @@ export class EmbedToolspaceTopRow {
                     content: LANG('submit'),
                     className: 'toolspace-row-button__submit',
                     css: {
+                        textTransform: 'uppercase',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -119,6 +120,7 @@ export class EmbedToolspaceTopRow {
                     content: LANG('exit-without-saving'),
                     className: 'toolspace-row-button__submit',
                     css: {
+                        textTransform: 'uppercase',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
