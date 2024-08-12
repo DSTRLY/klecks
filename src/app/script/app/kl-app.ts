@@ -96,6 +96,7 @@ export class KlApp {
     private readonly layerManager: LayerManager;
     private readonly toolspaceScroller: ToolspaceScroller;
     private readonly bottomBarWrapper: HTMLElement;
+    private isConventionMode: boolean = false;
 
     private updateCollapse(): void {
 
@@ -210,6 +211,7 @@ export class KlApp {
         pProject: IKlProject | null,
         pOptions: IKlAppOptions,
     ) {
+        this.isConventionMode = pProject?.isConventionMode ?? false;
         this.embed = pOptions.embed;
         // default 2048, unless your screen is bigger than that (that computer then probably has the horsepower for that)
         // but not larger than 4096 - a fairly arbitrary decision
@@ -846,32 +848,42 @@ export class KlApp {
                         });
                     };
 
-                    KL.popup({
-                        target: this.klRootEl,
-                        message: LANG('submit-prompt'),
-                        buttons: [LANG('submit'), 'Cancel'],
-                        callback: async (result) => {
-                            if (result !== LANG('submit')) {
-                                return;
-                            }
-
-                            const overlay = BB.el({
-                                parent: this.klRootEl,
-                                className: 'upload-overlay',
-                                content: '<div class="spinner"></div> ' + LANG('submit-submitting'),
+                    if (this.isConventionMode) {
+                        this.embed!.onSubmit(
+                            () => {
+                                pOptions.saveReminder!.reset();
+                            },
+                            () => {
+                                onFailure();
                             });
-
-                            this.embed!.onSubmit(
-                                () => {
-                                    pOptions.saveReminder!.reset();
-                                    overlay.remove();
-                                },
-                                () => {
-                                    overlay.remove();
-                                    onFailure();
+                    } else {
+                        KL.popup({
+                            target: this.klRootEl,
+                            message: LANG('submit-prompt'),
+                            buttons: [LANG('submit'), 'Cancel'],
+                            callback: async (result) => {
+                                if (result !== LANG('submit')) {
+                                    return;
+                                }
+    
+                                const overlay = BB.el({
+                                    parent: this.klRootEl,
+                                    className: 'upload-overlay',
+                                    content: '<div class="spinner"></div> ' + LANG('submit-submitting'),
                                 });
-                        },
-                    });
+    
+                                this.embed!.onSubmit(
+                                    () => {
+                                        pOptions.saveReminder!.reset();
+                                        overlay.remove();
+                                    },
+                                    () => {
+                                        overlay.remove();
+                                        onFailure();
+                                    });
+                            },
+                        });
+                    }
                 },
                 // onLeftRight: () => {
                 //     this.uiState = this.uiState === 'left' ? 'right' : 'left';
@@ -1773,5 +1785,13 @@ export class KlApp {
     destroy() {
         klHistory.clearHistory();
         this.klCanvas.destroy();
+    }
+
+    getIsConventionMode(): boolean {
+        return this.isConventionMode;
+    }
+
+    setIsConventionMode(value: boolean): void {
+        this.isConventionMode = value;
     }
 }

@@ -85,6 +85,7 @@ export type IKlBasicLayer = {
 };
 
 export type IKlProject = {
+    isConventionMode?: boolean;
     width: number; // int
     height: number; // int
     layers: {
