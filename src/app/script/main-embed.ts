@@ -194,4 +194,9 @@ export class Embed {
         }
     }
 
+    setSigningAs(signingAs: string) {
+        if (this.klApp) {
+            this.klApp.setSigningAs(signingAs);
+        }
+    }
 }

@@ -168,4 +168,10 @@ export class EmbedWrapper {
     getPNGOfLayerByName: ((name: string) => Blob) | undefined = undefined;
     getCanvasLayerByName: ((name: string) => HTMLCanvasElement) | undefined = undefined;
     getPSD: (() => Promise<Blob>) | undefined = undefined;
+
+    setSigningAs(signingAs: string) {
+        if (this.instance) {
+            this.instance.setSigningAs(signingAs);
+        }
+    }
 }

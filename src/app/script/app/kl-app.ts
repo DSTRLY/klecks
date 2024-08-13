@@ -97,6 +97,7 @@ export class KlApp {
     private readonly toolspaceScroller: ToolspaceScroller;
     private readonly bottomBarWrapper: HTMLElement;
     private isConventionMode: boolean = false;
+    private signingAs: string | undefined;
 
     private updateCollapse(): void {
 
@@ -1793,5 +1794,42 @@ export class KlApp {
 
     setIsConventionMode(value: boolean): void {
         this.isConventionMode = value;
+    }
+
+    setSigningAs(value: string): void {
+        this.signingAs = value;
+
+        const toolspaceTopRow = document.querySelector('.kl-toolspace-row');
+        if (!toolspaceTopRow) {
+            return;
+        }
+
+        let signingAsSpan = toolspaceTopRow.querySelector('.signing-as-span');
+
+        if (typeof this.signingAs !== 'string' || this.signingAs.trim() === '') {
+            if (signingAsSpan) {
+                signingAsSpan.remove();
+            }
+            return;
+        }
+
+        const signingText = `Signing as: ${this.signingAs}`;
+
+        if (signingAsSpan) {
+            signingAsSpan.textContent = signingText;
+            return;
+        }
+
+        signingAsSpan = BB.el({
+            tagName: 'span',
+            className: 'signing-as-span',
+            textContent: signingText,
+            css: {
+                padding: '8px 16px',
+                fontSize: '14px',
+                color: '#666',
+            }
+        });
+        toolspaceTopRow.insertBefore(signingAsSpan, toolspaceTopRow.firstChild);
     }
 }

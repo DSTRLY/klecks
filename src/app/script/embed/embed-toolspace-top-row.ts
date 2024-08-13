@@ -20,9 +20,9 @@ export class EmbedToolspaceTopRow {
         this.rootEl = BB.el({
             className: 'kl-toolspace-row',
             css: {
-                height: '36px',
                 display: 'flex',
                 padding: '0 16px',
+                flexDirection: 'column',
             },
         });
 
@@ -89,7 +89,7 @@ export class EmbedToolspaceTopRow {
                         alignItems: 'center',
                         justifyContent: 'center',
                         width: '100%',
-                        height: '100%',
+                        height: '32px',
                     },
                 }),
                 contain: true,
@@ -125,7 +125,7 @@ export class EmbedToolspaceTopRow {
                         alignItems: 'center',
                         justifyContent: 'center',
                         width: '100%',
-                        height: '100%',
+                        height: '32px',
                     },
                 }),
                 contain: true,
