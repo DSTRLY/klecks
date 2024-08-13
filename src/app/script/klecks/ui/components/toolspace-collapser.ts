@@ -13,17 +13,17 @@ export class ToolspaceCollapser {
 
     private readonly rootEl: HTMLElement;
     private directionStr: TUiLayout;
-    private readonly icon: HTMLElement;
+    // private readonly icon: HTMLElement;
     private stateIsOpen: boolean;
     private readonly txt: HTMLElement;
 
 
     private update(): void {
         if (this.directionStr === 'left') {
-            this.icon.style.transform = this.stateIsOpen ? 'rotate(180deg)' : '';
+            // this.icon.style.transform = this.stateIsOpen ? 'rotate(180deg)' : '';
             this.txt.textContent = this.stateIsOpen ? HIDE_TOOLS_TXT : SHOW_TOOLS_TXT;
         } else {
-            this.icon.style.transform = this.stateIsOpen ? '' : 'rotate(180deg)';
+            // this.icon.style.transform = this.stateIsOpen ? '' : 'rotate(180deg)';
             this.txt.textContent = this.stateIsOpen ? HIDE_TOOLS_TXT : SHOW_TOOLS_TXT;
         }
     }
@@ -62,17 +62,18 @@ export class ToolspaceCollapser {
             },
         });
 
-        this.icon = BB.el({
-            parent: this.rootEl,
-            content: '➡️',
-            css: {
-                userSelect: 'none',
-            },
-        });
+        // this.icon = BB.el({
+        //     parent: this.rootEl,
+        //     content: '➡️',
+        //     css: {
+        //         userSelect: 'none',
+        //     },
+        // });
 
         this.txt = BB.el({
             content: this.stateIsOpen ? HIDE_TOOLS_TXT : SHOW_TOOLS_TXT,
             css: {
+                marginTop: '8px',
                 writingMode: 'vertical-rl',
             }
         });

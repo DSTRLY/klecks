@@ -1828,6 +1828,7 @@ export class KlApp {
                 padding: '8px 16px',
                 fontSize: '14px',
                 color: '#666',
+                textAlign: 'center',
             }
         });
         toolspaceTopRow.insertBefore(signingAsSpan, toolspaceTopRow.firstChild);

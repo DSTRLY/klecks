@@ -98,7 +98,7 @@ export class UndoRedoFloat {
 
         this.undoButton = createButton({
             onClick: p.onUndo,
-            image: '↩️',
+            image: '',
             text:'UNDO',
         });
         this.undoButton.el.title = LANG('undo');
@@ -107,7 +107,7 @@ export class UndoRedoFloat {
 
         this.redoButton = createButton({
             onClick: p.onRedo,
-            image: '↪️',
+            image: '',
             text: 'REDO',
         });
         this.redoButton.el.title = LANG('redo');
