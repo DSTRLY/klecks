@@ -26,7 +26,7 @@ import { LineSanitizer } from '../klecks/events/line-sanitizer';
 import { TabRow } from '../klecks/ui/components/tab-row';
 import { LayerPreview } from '../klecks/ui/components/layer-preview';
 import { KlColorSlider } from '../klecks/ui/components/kl-color-slider';
-// import { ToolspaceToolRow } from '../klecks/ui/components/toolspace-tool-row';
+import { ToolspaceToolRow } from '../klecks/ui/components/toolspace-tool-row';
 import { UndoRedoFloat } from '../klecks/ui/components/undo-redo-float';
 import { StatusOverlay } from '../klecks/ui/components/status-overlay';
 import { SaveToComputer } from '../klecks/storage/save-to-computer';
@@ -78,7 +78,7 @@ export class KlApp {
     private uiHeight: number;
     private readonly layerPreview: LayerPreview;
     private readonly klColorSlider: KlColorSlider;
-    // private readonly toolspaceToolRow: ToolspaceToolRow;
+    private readonly toolspaceToolRow: ToolspaceToolRow;
     private readonly undoRedoFloat: UndoRedoFloat;
     private readonly statusOverlay: StatusOverlay;
     private readonly klCanvas: KlCanvas;
@@ -382,7 +382,7 @@ export class KlApp {
                 brushSettingService.setColor(rgbObj);
                 if (isDragDone) {
                     this.klColorSlider.pickingDone();
-                    // this.klCanvasWorkspace.setMode(this.toolspaceToolRow.getActive());
+                    this.klCanvasWorkspace.setMode(this.toolspaceToolRow.getActive());
                 }
             },
             onFill: (canvasX, canvasY) => {
@@ -919,40 +919,40 @@ export class KlApp {
         }
 
 
-        // this.toolspaceToolRow = new KL.ToolspaceToolRow({
-        //     onActivate: (activeStr) => {
-        //         if (activeStr === 'draw') {
-        //             this.klCanvasWorkspace.setMode('draw');
-        //         } else if (activeStr === 'hand') {
-        //             this.klCanvasWorkspace.setMode('hand');
-        //         } else if (activeStr === 'fill') {
-        //             this.klCanvasWorkspace.setMode('fill');
-        //         } else if (activeStr === 'gradient') {
-        //             this.klCanvasWorkspace.setMode('gradient');
-        //         } else if (activeStr === 'text') {
-        //             this.klCanvasWorkspace.setMode('text');
-        //         } else if (activeStr === 'shape') {
-        //             this.klCanvasWorkspace.setMode('shape');
-        //         } else {
-        //             throw new Error('unknown activeStr');
-        //         }
-        //         mainTabRow && mainTabRow.open(activeStr);
-        //         updateMainTabVisibility();
-        //         this.klColorSlider.pickingDone();
-        //     },
-        //     onZoomIn: () => {
-        //         this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? 1 / 8 : 1 / 2);
-        //     },
-        //     onZoomOut: () => {
-        //         this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? -1 / 8 : -1 / 2);
-        //     },
-        //     onUndo: () => {
-        //         undoRedoCatchup.undo();
-        //     },
-        //     onRedo: () => {
-        //         undoRedoCatchup.redo();
-        //     },
-        // });
+        this.toolspaceToolRow = new KL.ToolspaceToolRow({
+            onActivate: (activeStr) => {
+                if (activeStr === 'draw') {
+                    this.klCanvasWorkspace.setMode('draw');
+                } else if (activeStr === 'hand') {
+                    this.klCanvasWorkspace.setMode('hand');
+                } else if (activeStr === 'fill') {
+                    this.klCanvasWorkspace.setMode('fill');
+                } else if (activeStr === 'gradient') {
+                    this.klCanvasWorkspace.setMode('gradient');
+                } else if (activeStr === 'text') {
+                    this.klCanvasWorkspace.setMode('text');
+                } else if (activeStr === 'shape') {
+                    this.klCanvasWorkspace.setMode('shape');
+                } else {
+                    throw new Error('unknown activeStr');
+                }
+                mainTabRow && mainTabRow.open(activeStr);
+                updateMainTabVisibility();
+                this.klColorSlider.pickingDone();
+            },
+            onZoomIn: () => {
+                this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? 1 / 8 : 1 / 2);
+            },
+            onZoomOut: () => {
+                this.klCanvasWorkspace.zoomByStep(keyListener.isPressed('shift') ? -1 / 8 : -1 / 2);
+            },
+            onUndo: () => {
+                undoRedoCatchup.undo();
+            },
+            onRedo: () => {
+                undoRedoCatchup.redo();
+            },
+        });
         // this.toolspaceToolRow.setIsSmall(this.uiHeight < 540);
         // klHistory.addListener(() => {
         //     this.toolspaceToolRow.setEnableUndo(klHistory.canUndo());
