@@ -16,7 +16,7 @@ export class EmbedToolspaceTopRow {
 
     // ---- public ----
 
-    constructor(p: { onSubmit?: () => void; onLeftRight?: () => void; onHelp?: () => void, onCloseApp?: () => void }) {
+    constructor(p: { onSubmit?: () => void; onLeftRight?: () => void; onHelp?: () => void, onCloseApp?: () => void, onUpload?: () => void }) {
         this.rootEl = BB.el({
             className: 'kl-toolspace-row',
             css: {
@@ -96,6 +96,28 @@ export class EmbedToolspaceTopRow {
             });
 
             this.rootEl.append(submitButton.el);
+        }
+
+        if (typeof p.onUpload === 'function') {
+            const uploadButton = createButton({
+                onClick: p.onUpload,
+                title: LANG('upload-submit'),
+                content: BB.el({
+                    content: LANG('upload-submit'),
+                    className: 'toolspace-row-button__submit mt-4',
+                    css: {
+                        textTransform: 'uppercase',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '100%',
+                        height: '32px',
+                    },
+                }),
+                contain: true,
+            });
+
+            this.rootEl.append(uploadButton.el);
         }
 
         // const helpButton = createButton({

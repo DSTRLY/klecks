@@ -13,6 +13,7 @@ export interface IEmbedParams {
     psdBlob?: Blob;
     onSubmit: (onSuccess: () => void, onError: () => void) => void;
     onCloseApp: () => void;
+    onUpload: () => void;
     embedUrl: string;
     logoImg?: any;
     bottomBar?: HTMLElement;
@@ -64,6 +65,9 @@ export class Embed {
                     embed: {
                         url: this.p.embedUrl,
                         onSubmit: this.p.onSubmit,
+                        onUpload: () => {
+                            this.p.onUpload();
+                        },
                         onCloseApp: () => {
                             this.p.onCloseApp();
                         }

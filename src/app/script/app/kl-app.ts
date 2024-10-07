@@ -55,6 +55,7 @@ type KlAppOptionsEmbed = {
     url: string;
     onSubmit: (onSuccess: () => void, onError: () => void) => void;
     onCloseApp: () => void;
+    onUpload: () => void;
 };
 
 interface IKlAppOptions {
@@ -814,6 +815,7 @@ export class KlApp {
                 // onHelp: () => {
                 //     showIframeModal(this.embed!.url + '/help.html', !!this.embed);
                 // },
+                onUpload: this.embed!.onUpload,
                 onSubmit: () => {
                     const onFailure = () => {
                         let closeFunc: () => void;
