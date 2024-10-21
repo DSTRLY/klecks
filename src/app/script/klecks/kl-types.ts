@@ -86,6 +86,7 @@ export type IKlBasicLayer = {
 
 export type IKlProject = {
     isConventionMode?: boolean;
+    isHideUpload?: boolean;
     width: number; // int
     height: number; // int
     layers: {

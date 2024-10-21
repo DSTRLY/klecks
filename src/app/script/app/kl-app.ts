@@ -98,6 +98,7 @@ export class KlApp {
     private readonly toolspaceScroller: ToolspaceScroller;
     private readonly bottomBarWrapper: HTMLElement;
     private isConventionMode: boolean = false;
+    private isHideUpload: boolean = false;
     private signingAs: string | undefined;
 
     private updateCollapse(): void {
@@ -214,6 +215,7 @@ export class KlApp {
         pOptions: IKlAppOptions,
     ) {
         this.isConventionMode = pProject?.isConventionMode ?? false;
+        this.isHideUpload = pProject?.isHideUpload ?? false;
         this.embed = pOptions.embed;
         // default 2048, unless your screen is bigger than that (that computer then probably has the horsepower for that)
         // but not larger than 4096 - a fairly arbitrary decision
@@ -815,7 +817,7 @@ export class KlApp {
                 // onHelp: () => {
                 //     showIframeModal(this.embed!.url + '/help.html', !!this.embed);
                 // },
-                onUpload: this.embed!.onUpload,
+                onUpload: this.isHideUpload ? undefined : this.embed!.onUpload,
                 onSubmit: () => {
                     const onFailure = () => {
                         let closeFunc: () => void;
